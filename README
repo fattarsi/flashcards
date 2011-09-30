@@ -1,0 +1,12 @@
+Flashcards v0.3
+
+A simple HTML5 app that features:
+ * Add / Edit / Delete flashcards through the frontend
+ * Uses localStorage to store all of your cards
+ * Works offline
+ * Separate css for iphone or small screens
+ * Detects iphone screen orientation and updates style
+ * Point feature for each card to track which cards you need to work more on
+ * Randomize feature to study cards in a different order
+
+Try it out at: http://fattarsi.com/m/html5/flashcards/

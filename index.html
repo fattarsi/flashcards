@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html manifest="cache.manifest">
+    <head>
+        <title>Flashcards</title>
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" >
+
+        <meta charset="utf-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="apple-touch-icon" href="images/icon.png" />
+
+        <link rel="stylesheet" href="main.css" type="text/css" media="screen" charset="utf-8" />
+        <!--[if !IE]>-->
+            <link media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" rel="stylesheet" />
+        <!--<![endif]-->
+    </head>
+    <body>
+        <div id="container">
+            <div id="main-container" onclick="flip()">
+                    <div id="main"></div>
+                    <div id="main-alt" style="display:none"></div>
+            </div>
+            
+            <div id="meter"></div>
+            
+            <div id="points">
+                <button id="point-down" onclick="pointDown()">Point down</button>
+                <button id="point-up" onclick="pointUp()">Point up</button>
+            </div>
+            
+            <div id="msg-container" style="display:none">
+                <span id="msg"></span>
+                <button id="msg-close" onclick="msgClose()">Close</button>
+            </div>
+            
+            <button id="button-prev" onclick="prev()"> &laquo; </button>
+            <button id="button-next" onclick="next()"> &raquo; </button>
+            
+            <div id="stats"></div>
+            
+            <div id="control">
+                <span id="random-container">Random <span id="random" onclick="toggleRandom()">off</span></span>
+                <button id="button-add" onclick="add()">Add</button>
+                <button onclick="edit()">Edit</button>
+                <button onclick="del()">Delete</button>
+            </div>
+            
+            <div id="conf" style="display:none">
+                <span id="conf-msg"></span>
+                <button id="conf-yes" onclick="">Yes</button>
+                <button id="conf-no" onclick="">No</button>
+            </div>
+            
+            <div id="crud" style="display:none">
+                <label for="phrase-1">Phrase 1:</label>
+                <input id="phrase-1" type="text" autocorrect="off" size="22" />
+                <br />
+                <label for="phrase-2">Phrase 2:</label>
+                <input id="phrase-2" type="text" autocorrect="off" size="22" />
+                
+                <input id="key" type="hidden" />
+                
+                <button id="button-save" onclick="save()">Save</button>
+                <button onclick="cancel()">Cancel</button>
+            </div>
+            
+            <div id="add-another" style="display:none">
+                <button onclick="add()">Add another?</button>
+                <button onclick="closeAddAnother()">Close</button>
+            </div>
+            
+            <div id="help" style="display:none">
+                <button id="button-help-close" onclick="helpClose()">Close</button>
+                <p><strong>Keyboard shortcuts</strong><br />
+                    Arrow up/down - Flip card<br />
+                    Arrow left/right - Next/Previous card<br />
+                    A - Add a new card<br />
+                    E - Edit current card<br />
+                <p>
+            </div>
+            
+            <button id="button-help" onclick="help()">Help</button>
+            <button id="button-reset" onclick="reset()">Reset</button>
+            
+            <span id="credits">chris fattarsi</span>
+            <span id="version">version 0.3</span>
+        </div>
+        
+        <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>
+        <script src="flashcards.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">        
+            //Globals
+            var CARD; //the current card
+            var CARDS; //array of card keys
+            var INDEX = -1; //current index in array
+            var RANDOM = false;
+            
+            initCards();
+            
+            //Capture key events
+            document.onkeydown = checkHotkey;
+            
+            var currentWidth = 0;
+            var updateLayout = function() {
+            if (window.innerWidth != currentWidth) {
+              currentWidth = window.innerWidth;
+              var orient = (currentWidth == 480) ? "landscape" : "portrait";
+              document.body.setAttribute("orient", orient);
+              window.scrollTo(0, 1);
+              //alert(orient+currentWidth);
+            }
+          };
+          
+          //updateLayout();
+          //iPhone.DomLoad(updateLayout);
+          setInterval(updateLayout, 750);
+        </script>
+    </body>
+</html>

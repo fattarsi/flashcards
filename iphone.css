@@ -1,0 +1,178 @@
+body[orient="portrait"] #add-another {
+    position:absolute;
+    bottom:120px;
+    left:75px;
+}
+
+body[orient="portrait"] #button-next {
+    position:absolute;
+    top:100px;
+    right:10px;
+}
+
+body[orient="landscape"] #button-next {
+    position:absolute;
+    top:75px;
+    right:10px;
+}
+
+body[orient="portrait"] #button-prev {
+    position:absolute;
+    top:100px;
+    left:10px;
+}
+
+#button-prev body[orient="landscape"] {
+    /*this needs to be here for the next rule to work. ??? */
+}
+
+body[orient="landscape"] #button-prev {
+    position:absolute;
+    top:75px;
+    left:10px;
+}
+
+body[orient="portrait"] #conf {
+    position:absolute;
+    top:30px;
+    left:10px;
+    width:285px;
+    border:0px;
+}
+
+body[orient="landscape"] #conf {
+    position:absolute;
+    top:20px;
+    left:2px;
+    width:285px;
+    border:0px;
+}
+
+body[orient="portrait"] #container {
+    position:relative;
+    width:295px;
+    height:440px;
+    border:1px dashed #000;
+}
+
+body[orient="landscape"] #container {
+    position:relative;
+    width:460px;
+    min-height:10px;
+    height:280px;
+    border:1px dashed #000;
+}
+
+body[orient="portrait"] #control {
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:233px;
+}
+
+body[orient="landscape"] #control {
+    position:absolute;
+    top:10px;
+    right:2px;
+    width:233px;
+}
+
+body[orient="portrait"] #crud {
+    position:absolute;
+    bottom:90px;
+    left:20px;
+    width:250px;
+    min-height:50px;
+    border:1px solid #000;
+}
+
+body[orient="landscape"] #crud {
+    position:absolute;
+    bottom:90px;
+    left:20px;
+    width:250px;
+    height:50px;
+    border:1px solid #000;
+}
+
+body[orient="portrait"] #main-container {
+    position:absolute;
+    top:135px;
+    left:2px;
+    cursor:pointer;
+    margin:auto;
+    width:290px;
+    border:1px solid #000;
+    font-size:30px;
+    text-align:center;
+}
+
+body[orient="landscape"] #main-container {
+    position:absolute;
+    top:100px;
+    left:2px;
+    cursor:pointer;
+    margin:auto;
+    width:450px;
+    border:1px solid #000;
+    font-size:30px;
+    text-align:center;
+}
+
+body[orient="portrait"] #meter {
+    position:absolute;
+    bottom:232px;
+    left:152px;
+}
+
+body[orient="landscape"] #meter {
+    position:absolute;
+    bottom:116px;
+    left:230px;
+}
+
+body[orient="portrait"] #msg-container {
+    position:absolute;
+    top:70px;
+    left:20px;
+    width:250px;
+    border:0px;
+}
+
+body[orient="landscape"] #msg-container {
+    position:absolute;
+    top:60px;
+    left:20px;
+    width:200px;
+    border:0px;
+}
+
+body[orient="portrait"] #points {
+    position:absolute;
+    bottom:230px;
+    left:2px;
+    width:290px;
+}
+
+body[orient="landscape"] #points {
+    position:absolute;
+    top:140px;
+    left:2px;
+    width:450px;
+}
+
+body[orient="portrait"] #stats {
+    position:absolute;
+    top:105px;
+    left:140px;
+    font-size:14px;
+    color:#444;
+}
+
+body[orient="landscape"] #stats {
+    position:absolute;
+    top:75px;
+    left:220px;
+    font-size:14px;
+    color:#444;
+}

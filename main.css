@@ -1,0 +1,164 @@
+/*
+ Organization:
+ - Global classes at top in alphabetical order
+ - IDs in alphabetical order with sections indented (4 spaces)
+*/
+
+#add-another {
+    position:absolute;
+    bottom:58px;
+    left:325px;
+}
+
+#button-help {
+    position:absolute;
+    bottom:5px;
+    left:5px;
+}
+
+#button-next {
+    position:absolute;
+    top:152px;
+    right:196px;
+}
+
+#button-prev {
+    position:absolute;
+    top:152px;
+    left:196px;
+}
+
+#button-reset {
+    position:absolute;
+    bottom:5px;
+    right:5px;
+}
+
+#conf {
+    position:absolute;
+    top:50px;
+    left:200px;
+    width:400px;
+    border:1px solid #000;
+}
+
+#container {
+    position:relative;
+    width:800px;
+    min-height:400px;
+    margin:auto;
+    border:1px dashed #000;
+}
+
+#control {
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:211px;
+}
+
+#credits {
+    position:absolute;
+    bottom:-10px;
+    left:0px;
+    font-size:9px;
+    color:#ccc;
+}
+
+#crud {
+    position:absolute;
+    bottom:30px;
+    left:250px;
+    width:300px;
+    min-height:50px;
+    border:1px solid #000;
+}
+
+    #crud button {
+        float:right;
+    }
+
+#help {
+    position:absolute;
+    bottom:-136px;
+    left:200px;
+    border:1px solid #000;
+    width:400px;
+    min-height:100px;
+}
+
+    #help p {
+        margin:0px;
+    }
+
+#main-container {
+    position:absolute;
+    top:189px;
+    left:200px;
+    cursor:pointer;
+    margin:auto;
+    width:400px;
+    border:1px solid #000;
+    font-size:30px;
+    text-align:center;
+}
+
+#main-alt {
+    background-color:#eee;
+}
+
+#meter {
+    position:absolute;
+    bottom:132px;
+    left:390px;
+}
+
+#msg-container {
+    position:absolute;
+    top:20px;
+    left:200px;
+    width:350px;
+    border:1px solid #000;
+}
+
+    #msg-container button {
+        float:right;
+    }
+
+#point-up {
+    float:right;
+}
+
+#points {
+    position:absolute;
+    bottom:130px;
+    left:200px;
+    width:400px;
+}
+
+#random {
+    font-size:10px;
+    padding:4px;
+    cursor:pointer;
+    border:1px solid #000;
+}
+
+#random-container {
+    font-size:10px; 
+}
+
+#stats {
+    position:absolute;
+    top:152px;
+    left:387px;
+    font-size:14px;
+    color:#444;
+}
+
+#version {
+    position:absolute;
+    bottom:-10px;
+    right:0px;
+    font-size:9px;
+    color:#ccc;
+}
