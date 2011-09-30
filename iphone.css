@@ -1,7 +1,13 @@
 body[orient="portrait"] #add-another {
     position:absolute;
-    bottom:120px;
+    bottom:170px;
     left:75px;
+}
+
+body[orient="landscape"] #add-another {
+    position:absolute;
+    bottom:90px;
+    left:150px;
 }
 
 body[orient="portrait"] #button-next {
@@ -42,7 +48,7 @@ body[orient="portrait"] #conf {
 
 body[orient="landscape"] #conf {
     position:absolute;
-    top:20px;
+    top:30px;
     left:2px;
     width:285px;
     border:0px;
@@ -66,20 +72,20 @@ body[orient="landscape"] #container {
 body[orient="portrait"] #control {
     position:absolute;
     top:10px;
-    right:10px;
-    width:233px;
+    right:0px;
+    width:170px;
 }
 
 body[orient="landscape"] #control {
     position:absolute;
     top:10px;
     right:2px;
-    width:233px;
+    width:170px;
 }
 
 body[orient="portrait"] #crud {
     position:absolute;
-    bottom:90px;
+    bottom:120px;
     left:20px;
     width:250px;
     min-height:50px;
@@ -88,11 +94,31 @@ body[orient="portrait"] #crud {
 
 body[orient="landscape"] #crud {
     position:absolute;
-    bottom:90px;
-    left:20px;
+    bottom:80px;
+    left:110px;
     width:250px;
     height:50px;
     border:1px solid #000;
+}
+
+body[orient="portrait"] #help {
+    position:absolute;
+    cursor:pointer;
+    bottom:-110px;
+    left:10px;
+    border:1px solid #000;
+    width:280px;
+    min-height:100px;
+}
+
+body[orient="landscape"] #help {
+    position:absolute;
+    cursor:pointer;
+    bottom:-110px;
+    left:30px;
+    border:1px solid #000;
+    width:400px;
+    min-height:100px;
 }
 
 body[orient="portrait"] #main-container {
@@ -141,10 +167,28 @@ body[orient="portrait"] #msg-container {
 
 body[orient="landscape"] #msg-container {
     position:absolute;
-    top:60px;
-    left:20px;
+    top:55px;
+    left:140px;
     width:200px;
     border:0px;
+}
+
+body[orient="portrait"] #options {
+    position:absolute;
+    bottom:2px;
+    left:60px;
+    width:170px;
+    text-align:center;
+    padding-bottom:5px;
+}
+
+body[orient="landscape"] #options {
+    position:absolute;
+    bottom:2px;
+    left:75px;
+    width:300px;
+    text-align:center;
+    padding-bottom:5px;
 }
 
 body[orient="portrait"] #points {

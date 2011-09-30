@@ -41,16 +41,6 @@ function checkHotkey(e) {
     case 38:
       flip();
       break;
-    case 65:
-    case 97:
-      add();
-      break;
-    case 68:
-      del();
-      break;
-    case 69:
-      edit();
-      break;
   }
 }
 
@@ -76,6 +66,7 @@ function delYes() {
 
 function edit() {
   hotkeyDisable();
+  hide('add-another');
   document.getElementById('phrase-1').value = CARD['1'];
   document.getElementById('phrase-2').value = CARD['2'];
   document.getElementById('key').value = CARDS[INDEX];
@@ -91,6 +82,20 @@ function flip() {
 function flipReset() {
   document.getElementById('main').style.display = '';
   document.getElementById('main-alt').style.display = 'none';
+}
+
+// Return card array from storage or a new one
+function getCards() {
+  var c = localStorage["cards"];
+  var cards;
+  if (c) {
+    cards = JSON.parse(c);
+  } else {
+    cards = new Array();
+  }
+  
+  cards.save = updateCards;
+  return cards;
 }
 
 function help() {
@@ -115,19 +120,23 @@ function hotkeyEnable() {
 
 function initCards() {
   var c = localStorage["cards"];
+  CARDS = getCards();
             
   if (c) {
-      CARDS = JSON.parse(c);
-      CARDS.save = updateCards;
       updateStats();
+      next();
   } else {
-      CARDS = new Array();
-      CARDS.save = updateCards;
-      setMsg('No cards. Add some.');
+      //hide items not used when there are 0 cards (next,prev)
+      navHide();
+      
+      // set help text for first run.
+      setMsg('Click on messages to close.');
+      document.getElementById('main').innerHTML = 'Click here to toggle card.';
+      document.getElementById('main-alt').innerHTML = 'Now add some cards.';
       document.getElementById('button-add').focus();
   }
   
-  next();
+  //next();
 }
 
 function makeKey() {
@@ -149,26 +158,33 @@ function msgClose() {
   document.getElementById('msg-container').style.display = 'none';
 }
 
+function navShow(){
+  show('button-next');
+  show('button-prev');
+  show('meter');
+  show('options');
+  show('points');
+  show('stats');
+}
+
+function navHide() {
+  hide('add-another');
+  hide('button-next');
+  hide('button-prev');
+  hide('meter');
+  hide('options');
+  hide('stats');
+  hide('points');
+}
+
 function next() {
   //reset main display
   flipReset();
-  
-  if (RANDOM) {
-    var prev = INDEX;
-    var count = 0;
-    var max = 3;
-    do {
-      count += 1;
-      INDEX = Math.floor(Math.random() * CARDS.length);
-    } while (CARDS.length > 1 && prev == INDEX && count < max);
-  } else {
-  
-    INDEX +=1;
-    if (INDEX >= CARDS.length) {
-      INDEX = 0;
-    }
-  
+  INDEX +=1;
+  if (INDEX >= CARDS.length) {
+    INDEX = 0;
   }
+
   updateMain();
 }
 
@@ -212,13 +228,14 @@ function reset() {
   document.getElementById('conf-yes').onclick = resetYes;
   document.getElementById('conf-no').onclick = resetNo;
   show('conf');
+  document.getElementById('conf-no').focus();
 }
 
 function resetYes() {
   localStorage.clear();
   setMsg('Reset settings');
   initCards();
-  //updateMain();
+  updateMain();
   hide('conf');
 }
 
@@ -248,11 +265,27 @@ function save() {
   
   var msg = "Card updated";
   
+  // check if this is a new card
   if (!key) {
     key = makeKey();
+    //in the event the array was randomized reload original array
+    var current;
+    if (RANDOM) {
+      var current = CARDS.slice();
+      current.push(key);
+      CARDS = getCards();
+    }
     CARDS.push(key);
     CARDS.save();
+    
+    //but restore randomized array when done saving
+    if (RANDOM) {
+      CARDS = current.slice();
+    }
     msg = "New card added";
+  } else { //edit existing card
+    //lookup point value on existing card
+    card['points'] = JSON.parse(localStorage[key])['points'];
   }
   localStorage[key] = JSON.stringify(card,null,2);
   
@@ -260,6 +293,7 @@ function save() {
   cancel();
   updateMain();
   show('add-another');
+  document.getElementById('button-add-another').focus();
   hotkeyEnable();
 }
 
@@ -285,15 +319,17 @@ function toggle(id) {
 }
 
 function toggleRandom() {
-  if (document.getElementById('random').innerHTML =='off') {
-    RANDOM = true;
-    document.getElementById('random').innerHTML ='on';
-    document.getElementById('random').style.background = '#f00';
-  } else {
+  if (RANDOM) {
     RANDOM = false;
-    document.getElementById('random').innerHTML ='off';
-    document.getElementById('random').style.background = '#fff';
+    CARDS = JSON.parse(localStorage['cards']);
+    document.getElementById('random').className = 'off';
+  } else {
+    RANDOM = true;
+    CARDS.sort(function() {return 0.5 - Math.random()})
+    document.getElementById('random').className = 'on';
   }
+  
+  updateMain();
 }
 
 function updateCard() {
@@ -317,11 +353,14 @@ function updateMain() {
   }
   var c = localStorage[CARDS[INDEX]];
   if (!c) {
-    document.getElementById('main').innerHTML = '';
-    document.getElementById('main-alt').innerHTML = '';
+    //kills default text, any reason to blank out??
+    //document.getElementById('main').innerHTML = '';
+    //document.getElementById('main-alt').innerHTML = '';
     updateStats();
     return;
   }
+  
+  navShow();
   CARD = JSON.parse(localStorage[CARDS[INDEX]]);
   CARD.save = updateCard;
 

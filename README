@@ -1,4 +1,4 @@
-Flashcards v0.3
+Flashcards v0.3.1
 
 A simple HTML5 app that features:
  * Add / Edit / Delete flashcards through the frontend
@@ -10,3 +10,8 @@ A simple HTML5 app that features:
  * Randomize feature to study cards in a different order
 
 Try it out at: http://fattarsi.com/m/html5/flashcards/
+
+Recent changes:
+ * Style updates for mobile devices
+ * Default text for first time visitors and after a reset
+ * Randomize now creates a new temporary list so prev/next work

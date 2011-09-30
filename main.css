@@ -4,6 +4,11 @@
  - IDs in alphabetical order with sections indented (4 spaces)
 */
 
+a:link, a:visited {
+    text-decoration:none;
+    color:#ccc;
+}
+
 #add-another {
     position:absolute;
     bottom:58px;
@@ -80,7 +85,8 @@
 
 #help {
     position:absolute;
-    bottom:-136px;
+    cursor:pointer;
+    bottom:-108px;
     left:200px;
     border:1px solid #000;
     width:400px;
@@ -113,6 +119,13 @@
     left:390px;
 }
 
+#msg {
+    background-color:#eee;
+    text-align:center;
+    cursor:pointer;
+    display:block;
+}
+
 #msg-container {
     position:absolute;
     top:20px;
@@ -125,6 +138,31 @@
         float:right;
     }
 
+#options {
+    position:absolute;
+    bottom:2px;
+    left:100px;
+    width:600px;
+    text-align:center;
+    padding-bottom:5px;
+}
+    #options span {
+        font-size:10px;
+        padding:3px;
+        cursor:pointer;
+        border:1px solid #000;
+    }
+    
+    #options span.on {
+        background-color:#f00;
+        color:#fff;
+    }
+    
+    #options span.off {
+        background-color:#fff;
+        color:#000;        
+    }
+
 #point-up {
     float:right;
 }
@@ -134,17 +172,6 @@
     bottom:130px;
     left:200px;
     width:400px;
-}
-
-#random {
-    font-size:10px;
-    padding:4px;
-    cursor:pointer;
-    border:1px solid #000;
-}
-
-#random-container {
-    font-size:10px; 
 }
 
 #stats {
