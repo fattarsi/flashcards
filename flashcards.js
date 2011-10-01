@@ -57,9 +57,22 @@ function delNo() {
 }
 
 function delYes() {
-  localStorage.removeItem(CARDS[INDEX]);
+  var key = CARDS[INDEX];
+  localStorage.removeItem(key);
   CARDS.splice(INDEX,1);
+  var current;
+  //if random-mode also remove from proper list and update storage
+  if (RANDOM) {
+    current = CARDS.slice();
+    CARDS = getCards();
+    CARDS.splice(CARDS.indexOf(key), 1);
+  }
   CARDS.save();
+  
+  //restore randomized array
+  if (RANDOM) {
+    CARDS = current.slice();
+  }
   updateMain();
   hide('conf');
 }
@@ -84,7 +97,7 @@ function flipReset() {
   document.getElementById('main-alt').style.display = 'none';
 }
 
-// Return card array from storage or a new one
+// Return card array from storage or a new empty one
 function getCards() {
   var c = localStorage["cards"];
   var cards;
@@ -123,6 +136,7 @@ function initCards() {
   CARDS = getCards();
             
   if (c) {
+      syncCards();
       updateStats();
       next();
   } else {
@@ -271,7 +285,7 @@ function save() {
     //in the event the array was randomized reload original array
     var current;
     if (RANDOM) {
-      var current = CARDS.slice();
+      current = CARDS.slice();
       current.push(key);
       CARDS = getCards();
     }
@@ -308,6 +322,16 @@ function setMsg(msg) {
 
 function setStats(msg) {
   document.getElementById('stats').innerHTML = msg;
+}
+
+//iterates through all cards, removes any that do not exist in storage
+function syncCards() {
+  for (var i=0; i < CARDS.length; i++) {
+    if (localStorage[CARDS[i]] == undefined) {
+      CARDS.splice(i,1);
+    }
+  }
+  CARDS.save();
 }
 
 function toggle(id) {
