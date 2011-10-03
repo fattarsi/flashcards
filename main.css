@@ -9,6 +9,20 @@ a:link, a:visited {
     color:#ccc;
 }
 
+.button {
+    cursor:pointer;
+    border:1px solid #000;
+    text-align:center;
+    background-color:#ddd;
+    padding:30px;
+    border-radius:4px;
+}
+
+.button:active {
+    background-color:#A00;
+    color:#fff;
+}
+
 #add-another {
     position:absolute;
     bottom:58px;
@@ -23,14 +37,14 @@ a:link, a:visited {
 
 #button-next {
     position:absolute;
-    top:152px;
-    right:196px;
+    top:102px;
+    right:198px;
 }
 
 #button-prev {
     position:absolute;
-    top:152px;
-    left:196px;
+    top:102px;
+    left:198px;
 }
 
 #button-reset {
@@ -72,11 +86,10 @@ a:link, a:visited {
 
 #crud {
     position:absolute;
-    bottom:30px;
-    left:250px;
-    width:300px;
+    bottom:41px;
+    left:291px;
+    width:217px;
     min-height:50px;
-    border:1px solid #000;
 }
 
     #crud button {
@@ -107,6 +120,8 @@ a:link, a:visited {
     border:1px solid #000;
     font-size:30px;
     text-align:center;
+    max-height:36px;
+    overflow:auto;
 }
 
 #main-alt {
@@ -163,13 +178,17 @@ a:link, a:visited {
         color:#000;        
     }
 
+#point-down {
+    float:left;
+}
+
 #point-up {
     float:right;
 }
 
 #points {
     position:absolute;
-    bottom:130px;
+    bottom:86px;
     left:200px;
     width:400px;
 }

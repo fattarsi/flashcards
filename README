@@ -1,4 +1,4 @@
-Flashcards v0.3.2
+Flashcards v0.3.3
 
 A simple HTML5 app that features:
  * Add / Edit / Delete flashcards through the frontend
@@ -15,3 +15,4 @@ Recent changes:
  * Style updates for mobile devices
  * Default text for first time visitors and after a reset
  * Randomize now creates a new temporary list so prev/next work
+ * Some bug fixes

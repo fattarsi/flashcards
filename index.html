@@ -24,16 +24,16 @@
             <div id="meter"></div>
             
             <div id="points">
-                <button id="point-down" onclick="pointDown()">Point down</button>
-                <button id="point-up" onclick="pointUp()">Point up</button>
+                <span id="point-down" class="button" onclick="pointDown()">-1</span>
+                <span id="point-up" class="button" onclick="pointUp()">+1</span>
             </div>
             
             <div id="msg-container" style="display:none">
                 <span id="msg" onclick="msgClose()"></span>
             </div>
             
-            <button id="button-prev" onclick="prev()"> &laquo; </button>
-            <button id="button-next" onclick="next()"> &raquo; </button>
+            <span id="button-prev" class="button" onclick="prev()"> &laquo; </span>
+            <span id="button-next" class="button" onclick="next()"> &raquo; </span>
             
             <div id="stats"></div>
             
@@ -86,7 +86,7 @@
             <button id="button-reset" onclick="reset()">Reset</button>
             
             <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
-            <span id="version">version 0.3.2</span>
+            <span id="version">version 0.3.3</span>
         </div>
         
         <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>

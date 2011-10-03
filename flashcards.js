@@ -131,26 +131,17 @@ function hotkeyEnable() {
   document.onkeydown = checkHotkey;
 }
 
+//load array of cards
 function initCards() {
   var c = localStorage["cards"];
   CARDS = getCards();
             
   if (c) {
       syncCards();
-      updateStats();
       next();
   } else {
-      //hide items not used when there are 0 cards (next,prev)
-      navHide();
-      
-      // set help text for first run.
-      setMsg('Click on messages to close.');
-      document.getElementById('main').innerHTML = 'Click here to toggle card.';
-      document.getElementById('main-alt').innerHTML = 'Now add some cards.';
-      document.getElementById('button-add').focus();
+    updateMain();
   }
-  
-  //next();
 }
 
 function makeKey() {
@@ -345,28 +336,30 @@ function toggle(id) {
 function toggleRandom() {
   if (RANDOM) {
     RANDOM = false;
-    CARDS = JSON.parse(localStorage['cards']);
+    CARDS = getCards();
     document.getElementById('random').className = 'off';
   } else {
     RANDOM = true;
     CARDS.sort(function() {return 0.5 - Math.random()})
     document.getElementById('random').className = 'on';
   }
-  
   updateMain();
 }
 
+//update a single card in localstorage
 function updateCard() {
   var s = JSON.stringify(CARD,null,2);
   localStorage[CARDS[INDEX]] = s;
 }
 
+//update the cards array in localstorage
 function updateCards() {
   var s = JSON.stringify(CARDS,null,2);
   localStorage['cards'] = s;
   updateStats();
 }
 
+//set display based on index
 function updateMain() {
   if (INDEX < 0) {
     INDEX = 0;
@@ -376,10 +369,13 @@ function updateMain() {
     INDEX = CARDS.length -1;
   }
   var c = localStorage[CARDS[INDEX]];
-  if (!c) {
-    //kills default text, any reason to blank out??
-    //document.getElementById('main').innerHTML = '';
-    //document.getElementById('main-alt').innerHTML = '';
+  if (!c || CARDS.length < 1) {
+    // set help text for first run.
+    navHide();
+    setMsg('Click on messages to close.');
+    document.getElementById('main').innerHTML = 'Click here to toggle card.';
+    document.getElementById('main-alt').innerHTML = 'Now add some cards.';
+    document.getElementById('button-add').focus();
     updateStats();
     return;
   }
