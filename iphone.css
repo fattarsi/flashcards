@@ -1,55 +1,25 @@
 body[orient="portrait"] #add-another {
     position:absolute;
-    bottom:170px;
+    bottom:2px;
     left:75px;
-}
-
-body[orient="landscape"] #add-another {
-    position:absolute;
-    bottom:90px;
-    left:150px;
-}
-
-body[orient="portrait"] #button-next {
-    position:absolute;
-    top:100px;
-    right:10px;
-}
-
-body[orient="landscape"] #button-next {
-    position:absolute;
-    top:75px;
-    right:10px;
-}
-
-body[orient="portrait"] #button-prev {
-    position:absolute;
-    top:100px;
-    left:10px;
 }
 
 #button-prev body[orient="landscape"] {
     /*this needs to be here for the next rule to work. ??? */
 }
 
-body[orient="landscape"] #button-prev {
+body[orient="portrait"] #bottom-panel {
     position:absolute;
-    top:75px;
-    left:10px;
+    bottom:3px;
+    left:4px;
+    width:291px;
+    height:70px;
 }
 
 body[orient="portrait"] #conf {
     position:absolute;
     top:30px;
     left:10px;
-    width:285px;
-    border:0px;
-}
-
-body[orient="landscape"] #conf {
-    position:absolute;
-    top:30px;
-    left:2px;
     width:285px;
     border:0px;
 }
@@ -61,66 +31,6 @@ body[orient="portrait"] #container {
     border:1px dashed #000;
 }
 
-body[orient="landscape"] #container {
-    position:relative;
-    width:460px;
-    min-height:10px;
-    height:280px;
-    border:1px dashed #000;
-}
-
-body[orient="portrait"] #control {
-    position:absolute;
-    top:10px;
-    right:0px;
-    width:170px;
-}
-
-body[orient="landscape"] #control {
-    position:absolute;
-    top:10px;
-    right:2px;
-    width:170px;
-}
-
-body[orient="portrait"] #crud {
-    position:absolute;
-    bottom:120px;
-    left:20px;
-    width:250px;
-    min-height:50px;
-    border:1px solid #000;
-}
-
-body[orient="landscape"] #crud {
-    position:absolute;
-    bottom:80px;
-    left:110px;
-    width:250px;
-    height:50px;
-    border:1px solid #000;
-}
-
-body[orient="portrait"] #help {
-    position:absolute;
-    cursor:pointer;
-    bottom:-110px;
-    left:10px;
-    border:1px solid #000;
-    width:280px;
-    min-height:100px;
-}
-
-body[orient="landscape"] #help {
-    position:absolute;
-    cursor:pointer;
-    bottom:-110px;
-    left:30px;
-    border:1px solid #000;
-    width:400px;
-    min-height:100px;
-}
-
 body[orient="portrait"] #main-container {
     position:absolute;
     top:135px;
@@ -129,32 +39,8 @@ body[orient="portrait"] #main-container {
     margin:auto;
     width:290px;
     border:1px solid #000;
-    font-size:30px;
+    font-size:12px;
     text-align:center;
-}
-
-body[orient="landscape"] #main-container {
-    position:absolute;
-    top:100px;
-    left:2px;
-    cursor:pointer;
-    margin:auto;
-    width:450px;
-    border:1px solid #000;
-    font-size:30px;
-    text-align:center;
-}
-
-body[orient="portrait"] #meter {
-    position:absolute;
-    bottom:232px;
-    left:152px;
-}
-
-body[orient="landscape"] #meter {
-    position:absolute;
-    bottom:116px;
-    left:230px;
 }
 
 body[orient="portrait"] #msg-container {
@@ -165,58 +51,20 @@ body[orient="portrait"] #msg-container {
     border:0px;
 }
 
-body[orient="landscape"] #msg-container {
-    position:absolute;
-    top:55px;
-    left:140px;
-    width:200px;
-    border:0px;
-}
-
 body[orient="portrait"] #options {
     position:absolute;
     bottom:2px;
     left:60px;
     width:170px;
+    height:20px;
     text-align:center;
-    padding-bottom:5px;
+    padding-bottom:1px;
 }
 
-body[orient="landscape"] #options {
+body[orient="portrait"] #phrase-form {
     position:absolute;
-    bottom:2px;
-    left:75px;
-    width:300px;
-    text-align:center;
-    padding-bottom:5px;
-}
-
-body[orient="portrait"] #points {
-    position:absolute;
-    bottom:230px;
-    left:2px;
-    width:290px;
-}
-
-body[orient="landscape"] #points {
-    position:absolute;
-    top:140px;
-    left:2px;
-    width:450px;
-}
-
-body[orient="portrait"] #stats {
-    position:absolute;
-    top:105px;
-    left:140px;
-    font-size:14px;
-    color:#444;
-}
-
-body[orient="landscape"] #stats {
-    position:absolute;
-    top:75px;
-    left:220px;
-    font-size:14px;
-    color:#444;
+    top:5px;
+    left:20px;
+    width:250px;
+    min-height:50px;
 }

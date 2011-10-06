@@ -16,31 +16,39 @@
     </head>
     <body>
         <div id="container">
-            <div id="main-container" onclick="flip()">
+            <div id="main-container">
+                <span id="button-add" onclick="add()"><img src="icon-add.gif" /></span>
+                <span id="button-edit" onclick="edit()"><img src="icon-edit.png" /></span>
+                <span id="button-delete" onclick="del()"><img src="icon-delete.gif" /></span>
+                <div id="card-container" onclick="flip()">
                     <div id="main"></div>
                     <div id="main-alt" style="display:none"></div>
-            </div>
-            
-            <div id="meter"></div>
-            
-            <div id="points">
-                <span id="point-down" class="button" onclick="pointDown()">-1</span>
-                <span id="point-up" class="button" onclick="pointUp()">+1</span>
-            </div>
+                </div><!-- card-container -->
+                <div id="phrase-form" style="display:none">
+                    <form action="" onsubmit="return false;">
+                        <label for="phrase-1">Phrase 1:</label>
+                        <input id="phrase-1" type="text" autocorrect="off" size="22" />
+                        <br />
+                        <label for="phrase-2">Phrase 2:</label>
+                        <input id="phrase-2" type="text" autocorrect="off" size="22" />
+                        
+                        <input id="key" type="hidden" />
+                        
+                        <button id="button-save" type="submit" onclick="save()">Save</button>
+                        <button type="button" onclick="cancel()">Cancel</button>
+                    </form>
+                </div><!-- add-form -->
+                <div id="add-another" style="display:none">
+                    <button id="button-add-another" onclick="add()">Add another?</button>
+                    <button onclick="closeAddAnother()">Nope</button>
+                </div><!-- add-another -->
+                <div id="stats"></div>
+                <div id="meter"></div>
+                <div style="clear:both"></div>
+            </div><!-- main-container -->
             
             <div id="msg-container" style="display:none">
                 <span id="msg" onclick="msgClose()"></span>
-            </div>
-            
-            <span id="button-prev" class="button" onclick="prev()"> &laquo; </span>
-            <span id="button-next" class="button" onclick="next()"> &raquo; </span>
-            
-            <div id="stats"></div>
-            
-            <div id="control">
-                <button id="button-add" onclick="add()">Add</button>
-                <button onclick="edit()">Edit</button>
-                <button onclick="del()">Delete</button>
             </div>
             
             <div id="conf" style="display:none">
@@ -49,41 +57,17 @@
                 <button id="conf-no" onclick="">No</button>
             </div>
             
-            <div id="crud" style="display:none">
-                <form action="" onsubmit="return false;">
-                    <label for="phrase-1">Phrase 1:</label>
-                    <input id="phrase-1" type="text" autocorrect="off" size="22" />
-                    <br />
-                    <label for="phrase-2">Phrase 2:</label>
-                    <input id="phrase-2" type="text" autocorrect="off" size="22" />
-                    
-                    <input id="key" type="hidden" />
-                    
-                    <button id="button-save" type="submit" onclick="save()">Save</button>
-                    <button type="button" onclick="cancel()">Cancel</button>
-                </form>
-            </div>
-            
             <div id="options">
                 <span id="random" class="off" onclick="toggleRandom()">Randomize</span>
             </div>
+            <button id="reset" onclick="reset()">Clear all</button>
             
-            <div id="add-another" style="display:none">
-                <button id="button-add-another" onclick="add()">Add another?</button>
-                <button onclick="closeAddAnother()">Nope</button>
+            <div id="bottom-panel">
+                <div id="button-prev" class="button" onclick="prev()">&laquo;</div>
+                <div id="point-down" class="button" onclick="pointDown()">-1</div>
+                <div id="point-up" class="button" onclick="pointUp()">+1</div>
+                <div id="button-next" class="button" onclick="next()">&raquo;</div>
             </div>
-            
-            <div id="help" onclick="helpClose()" style="display:none">
-                <p>
-                    <ul>
-                        <li>Use arrow keys to navigate cards</li>
-                        <li>Use points to track cards you need to focus on</li>
-                    </ul>
-                <p>
-            </div>
-            
-            <button id="button-help" onclick="help()">Help</button>
-            <button id="button-reset" onclick="reset()">Reset</button>
             
             <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
             <span id="version">version 0.3.3</span>
@@ -107,7 +91,7 @@
             var updateLayout = function() {
             if (window.innerWidth != currentWidth) {
               currentWidth = window.innerWidth;
-              var orient = (currentWidth == 480) ? "landscape" : "portrait";
+              var orient = (currentWidth == 480) ? "" : "portrait";
               document.body.setAttribute("orient", orient);
               window.scrollTo(0, 1);
             }

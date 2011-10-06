@@ -8,20 +8,22 @@ if (Modernizr.localstorage) {
 function add() {
   hotkeyDisable();
   document.getElementById('button-save').onclick = save;
-  hide('add-another');
-  show('crud');
+  resetDisplay();
+  show('phrase-form');
   document.getElementById('phrase-1').focus();
 }
 
 function cancel() {
   document.getElementById('phrase-1').value = '';
   document.getElementById('phrase-2').value = '';
-  document.getElementById('crud').style.display = 'none';
   hotkeyEnable();
+  resetDisplay();
+  show('card-container');
 }
 
 function closeAddAnother() {
-  hide('add-another');
+  resetDisplay();
+  show('card-container');
 }
 
 function checkHotkey(e) {
@@ -48,6 +50,7 @@ function del() {
   document.getElementById('conf-msg').innerHTML = 'Are you sure you want to delete this card?';
   document.getElementById('conf-yes').onclick = delYes;
   document.getElementById('conf-no').onclick = delNo;
+  hide('msg-container');
   show('conf');
 }
 
@@ -79,11 +82,11 @@ function delYes() {
 
 function edit() {
   hotkeyDisable();
-  hide('add-another');
+  resetDisplay();
   document.getElementById('phrase-1').value = CARD['1'];
   document.getElementById('phrase-2').value = CARD['2'];
   document.getElementById('key').value = CARDS[INDEX];
-  show('crud');
+  show('phrase-form');
   document.getElementById('phrase-1').focus();
 }
 
@@ -121,6 +124,7 @@ function helpClose() {
 
 function hide(id) {
   document.getElementById(id).style.display = 'none';
+  //document.getElementById(id).style.zIndex = '-1000';
 }
 
 function hotkeyDisable() {
@@ -164,22 +168,18 @@ function msgClose() {
 }
 
 function navShow(){
-  show('button-next');
-  show('button-prev');
+  show('bottom-panel');
   show('meter');
   show('options');
-  show('points');
   show('stats');
 }
 
 function navHide() {
   hide('add-another');
-  hide('button-next');
-  hide('button-prev');
+  hide('bottom-panel');
   hide('meter');
   hide('options');
   hide('stats');
-  hide('points');
 }
 
 function next() {
@@ -234,6 +234,12 @@ function reset() {
   document.getElementById('conf-no').onclick = resetNo;
   show('conf');
   document.getElementById('conf-no').focus();
+}
+
+function resetDisplay() {
+  hide('add-another');
+  hide('card-container');
+  hide('phrase-form');
 }
 
 function resetYes() {
@@ -297,18 +303,22 @@ function save() {
   setMsg(msg);
   cancel();
   updateMain();
+  resetDisplay();
   show('add-another');
   document.getElementById('button-add-another').focus();
   hotkeyEnable();
 }
 
 function show(id) {
+  //document.getElementById(id).style.zIndex = '1000';
   document.getElementById(id).style.display = '';
 }
 
 function setMsg(msg) {
+  
   document.getElementById('msg').innerHTML = msg;
-  document.getElementById('msg-container').style.display = '';
+  hide('conf');
+  show('msg-container');
 }
 
 function setStats(msg) {
@@ -361,6 +371,7 @@ function updateCards() {
 
 //set display based on index
 function updateMain() {
+  hide('conf');
   if (INDEX < 0) {
     INDEX = 0;
   }
@@ -373,8 +384,8 @@ function updateMain() {
     // set help text for first run.
     navHide();
     setMsg('Click on messages to close.');
-    document.getElementById('main').innerHTML = 'Click here to toggle card.';
-    document.getElementById('main-alt').innerHTML = 'Now add some cards.';
+    document.getElementById('main').innerHTML = 'Click here to toggle';
+    document.getElementById('main-alt').innerHTML = 'Now add some';
     document.getElementById('button-add').focus();
     updateStats();
     return;
@@ -390,8 +401,9 @@ function updateMain() {
   document.getElementById('meter').value = CARD['points'];
   document.getElementById('meter').innerHTML = CARD['points'];
 
-  hide('meter');
-  setTimeout("show('meter')", 1);
+  //needed when using <meter> tag to refresh
+  //hide('meter');
+  //setTimeout("show('meter')", 1);
   
   updateStats();
 }

@@ -14,8 +14,6 @@ a:link, a:visited {
     border:1px solid #000;
     text-align:center;
     background-color:#ddd;
-    padding:30px;
-    border-radius:4px;
 }
 
 .button:active {
@@ -25,8 +23,26 @@ a:link, a:visited {
 
 #add-another {
     position:absolute;
-    bottom:58px;
-    left:325px;
+    top:28px;
+    left:124px;
+}
+
+#button-add {
+    position:absolute;
+    top:2px;
+    left:2px;
+}
+
+#button-delete {
+    position:absolute;
+    top:2px;
+    right:2px;
+}
+
+#button-edit {
+    position:absolute;
+    top:0px;
+    left:24px;
 }
 
 #button-help {
@@ -35,17 +51,19 @@ a:link, a:visited {
     left:5px;
 }
 
-#button-next {
+#bottom-panel {
     position:absolute;
-    top:102px;
-    right:198px;
+    bottom:3px;
+    left:9px;
+    width:450px;
+    height:70px;
 }
 
-#button-prev {
-    position:absolute;
-    top:102px;
-    left:198px;
-}
+    #bottom-panel div {
+        width:24%;
+        float:left;
+        padding:23px 0px;
+    }
 
 #button-reset {
     position:absolute;
@@ -53,27 +71,26 @@ a:link, a:visited {
     right:5px;
 }
 
+#card-container {
+    cursor:pointer;
+    overflow:auto;
+    font-size:30px;
+    text-align:center;
+}
+
 #conf {
     position:absolute;
-    top:50px;
-    left:200px;
+    top:54px;
+    left:27px;
     width:400px;
-    border:1px solid #000;
 }
 
 #container {
     position:relative;
-    width:800px;
-    min-height:400px;
+    width:460px;
+    height:280px;
     margin:auto;
     border:1px dashed #000;
-}
-
-#control {
-    position:absolute;
-    top:10px;
-    right:10px;
-    width:211px;
 }
 
 #credits {
@@ -84,54 +101,31 @@ a:link, a:visited {
     color:#ccc;
 }
 
-#crud {
-    position:absolute;
-    bottom:41px;
-    left:291px;
-    width:217px;
-    min-height:50px;
-}
-
-    #crud button {
-        float:right;
-    }
-
-#help {
-    position:absolute;
-    cursor:pointer;
-    bottom:-108px;
-    left:200px;
-    border:1px solid #000;
-    width:400px;
-    min-height:100px;
-}
-
-    #help p {
-        margin:0px;
-    }
-
-#main-container {
-    position:absolute;
-    top:189px;
-    left:200px;
-    cursor:pointer;
-    margin:auto;
-    width:400px;
-    border:1px solid #000;
-    font-size:30px;
-    text-align:center;
-    max-height:36px;
-    overflow:auto;
+#main {
+    padding:23px;
 }
 
 #main-alt {
     background-color:#eee;
+    padding:23px;
+}
+
+#main-container {
+    position:absolute;
+    top:108px;
+    left:28px;
+    margin:auto;
+    width:400px;
+    height:82px;
+    border:1px solid #000;
+    font-size:12px;
 }
 
 #meter {
     position:absolute;
-    bottom:132px;
-    left:390px;
+    bottom:2px;
+    right:2px;
+    font-size:12px;
 }
 
 #msg {
@@ -143,8 +137,8 @@ a:link, a:visited {
 
 #msg-container {
     position:absolute;
-    top:20px;
-    left:200px;
+    top:60px;
+    left:56px;
     width:350px;
     border:1px solid #000;
 }
@@ -155,9 +149,9 @@ a:link, a:visited {
 
 #options {
     position:absolute;
-    bottom:2px;
-    left:100px;
-    width:600px;
+    top:2px;
+    left:2px;
+    width:454px;
     text-align:center;
     padding-bottom:5px;
 }
@@ -178,25 +172,24 @@ a:link, a:visited {
         color:#000;        
     }
 
-#point-down {
-    float:left;
-}
 
-#point-up {
-    float:right;
-}
-
-#points {
+#phrase-form {
     position:absolute;
-    bottom:86px;
-    left:200px;
-    width:400px;
+    top:7px;
+    left:90px;
+    width:230px;
+}
+
+#reset {
+    position:absolute;
+    top:2px;
+    right:2px;
 }
 
 #stats {
     position:absolute;
-    top:152px;
-    left:387px;
+    bottom:2px;
+    left:2px;
     font-size:14px;
     color:#444;
 }
