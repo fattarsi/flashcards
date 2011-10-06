@@ -169,6 +169,8 @@ function msgClose() {
 
 function navShow(){
   show('bottom-panel');
+  show('button-delete');
+  show('button-edit');
   show('meter');
   show('options');
   show('stats');
@@ -177,6 +179,8 @@ function navShow(){
 function navHide() {
   hide('add-another');
   hide('bottom-panel');
+  hide('button-delete');
+  hide('button-edit');
   hide('meter');
   hide('options');
   hide('stats');
