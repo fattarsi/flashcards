@@ -21,6 +21,48 @@ function cancel() {
   show('card-container');
 }
 
+//return array of cards with points > 0
+function cardsHigh() {
+  var allCards = getCards();
+  var newCards = new Array();
+  for (var i=0 ; i<allCards.length ; i++) {
+    var card = getCard(allCards[i]);
+    if (card['points'] > 0) {
+      //push card key into new array
+      newCards.push(allCards[i]);
+    }
+  }
+  if (newCards.length > 0) {
+    return newCards;
+  }
+  //if no highcards return full set and set message
+  setMsg('0 high cards');
+  toggleOptionsOff();
+  OPTION_MODE=false;
+  return allCards;
+}
+
+//return array of cards with points < 0
+function cardsLow() {
+  var allCards = getCards();
+  var newCards = new Array();
+  for (var i=0 ; i<allCards.length ; i++) {
+    var card = getCard(allCards[i]);
+    if (card['points'] < 0) {
+      //push card key into new array
+      newCards.push(allCards[i]);
+    }
+  }
+  if (newCards.length > 0) {
+    return newCards;
+  }
+  //if no low cards return full set and set message
+  setMsg('0 low cards');
+  toggleOptionsOff();
+  OPTION_MODE=false;
+  return allCards;
+}
+
 function closeAddAnother() {
   resetDisplay();
   show('card-container');
@@ -64,16 +106,16 @@ function delYes() {
   localStorage.removeItem(key);
   CARDS.splice(INDEX,1);
   var current;
-  //if random-mode also remove from proper list and update storage
-  if (RANDOM) {
+  //if option-mode also remove from proper list and update storage
+  if (OPTION_MODE) {
     current = CARDS.slice();
     CARDS = getCards();
     CARDS.splice(CARDS.indexOf(key), 1);
   }
   CARDS.save();
   
-  //restore randomized array
-  if (RANDOM) {
+  //restore option-mode array if it still has elements in it
+  if (OPTION_MODE && CARDS.length > 1) {
     CARDS = current.slice();
   }
   updateMain();
@@ -98,6 +140,21 @@ function flip() {
 function flipReset() {
   document.getElementById('main').style.display = '';
   document.getElementById('main-alt').style.display = 'none';
+}
+
+//return card from storage or a new empty one
+function getCard(key) {
+  var c = localStorage[key];
+  var card = new Object();
+  if (c) {
+    var card = JSON.parse(c);
+    card.save = updateCard;
+  } else {
+    card['1'] = '';
+    card['2'] = '';
+    card['points'] = 0;
+  }
+  return card;
 }
 
 // Return card array from storage or a new empty one
@@ -248,6 +305,7 @@ function resetDisplay() {
 
 function resetYes() {
   localStorage.clear();
+  toggleOptionsOff();
   setMsg('Reset settings');
   initCards();
   updateMain();
@@ -283,18 +341,18 @@ function save() {
   // check if this is a new card
   if (!key) {
     key = makeKey();
-    //in the event the array was randomized reload original array
+    //in the event the array was changed due to option mode reload original array
     var current;
-    if (RANDOM) {
+    if (OPTION_MODE) {
       current = CARDS.slice();
-      current.push(key);
+      //current.push(key);
       CARDS = getCards();
     }
     CARDS.push(key);
     CARDS.save();
     
-    //but restore randomized array when done saving
-    if (RANDOM) {
+    //but restore option mode array when done saving
+    if (OPTION_MODE) {
       CARDS = current.slice();
     }
     msg = "New card added";
@@ -347,17 +405,42 @@ function toggle(id) {
   }
 }
 
-function toggleRandom() {
-  if (RANDOM) {
-    RANDOM = false;
+function toggleOption(elm) {
+  //determine if option was turned on or off
+  OPTION_MODE = elm.className == 'on';
+  //only one option can be active at a time so turn all of by default
+  toggleOptionsOff();
+  
+  if (OPTION_MODE) {
+    //all options off, reset to normal card array
     CARDS = getCards();
-    document.getElementById('random').className = 'off';
   } else {
-    RANDOM = true;
-    CARDS.sort(function() {return 0.5 - Math.random()})
-    document.getElementById('random').className = 'on';
+    //an option is turned on
+    OPTION_MODE = true;
+    elm.className = 'on';
+    
+    //find option and do work
+    switch(elm.id) {
+      case 'lows':
+        CARDS = cardsLow();
+        break;
+      case 'highs':
+        CARDS = cardsHigh();
+        break;
+      case 'random':
+        CARDS = getCards();
+        CARDS.sort(function() {return 0.5 - Math.random()});
+        break;
+    }
   }
+  
   updateMain();
+}
+
+function toggleOptionsOff() {
+  document.getElementById('lows').className = 'off';
+  document.getElementById('highs').className = 'off';
+  document.getElementById('random').className = 'off';
 }
 
 //update a single card in localstorage
@@ -375,6 +458,12 @@ function updateCards() {
 
 //set display based on index
 function updateMain() {
+  //if options mode and empty, restore to original set
+  if (OPTION_MODE && CARDS.length < 1) {
+    toggleOptionsOff();
+    OPTION_MODE=false;
+    CARDS = getCards();
+  }
   hide('conf');
   if (INDEX < 0) {
     INDEX = 0;
@@ -383,6 +472,7 @@ function updateMain() {
   if (INDEX >= CARDS.length) {
     INDEX = CARDS.length -1;
   }
+  
   var c = localStorage[CARDS[INDEX]];
   if (!c || CARDS.length < 1) {
     // set help text for first run.

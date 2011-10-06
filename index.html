@@ -58,7 +58,9 @@
             </div>
             
             <div id="options">
-                <span id="random" class="off" onclick="toggleRandom()">Randomize</span>
+                <span id="lows" class="off" onclick="toggleOption(this)">Lows</span>
+                <span id="random" class="off" onclick="toggleOption(this)">Randomize</span>
+                <span id="highs" class="off" onclick="toggleOption(this)">Highs</span>
             </div>
             <button id="reset" onclick="reset()">Clear all</button>
             
@@ -70,7 +72,7 @@
             </div>
             
             <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
-            <span id="version">version 0.3.3</span>
+            <span id="version">version 0.3.4</span>
         </div>
         
         <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>
@@ -80,7 +82,7 @@
             var CARD; //the current card
             var CARDS; //array of card keys
             var INDEX = -1; //current index in array
-            var RANDOM = false;
+            var OPTION_MODE = false;
             
             initCards();
             
