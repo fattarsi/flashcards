@@ -17,9 +17,9 @@
     <body>
         <div id="container">
             <div id="main-container">
-                <span id="button-add" onclick="add()"><img src="icon-add.gif" /></span>
-                <span id="button-edit" onclick="edit()"><img src="icon-edit.png" /></span>
-                <span id="button-delete" onclick="del()"><img src="icon-delete.gif" /></span>
+                <span id="button-add" class="button" onclick="add()">add</span>
+                <span id="button-edit" class="button last" onclick="edit()">edit</span>
+                <span id="button-delete" class="button last" onclick="del()">delete</span>
                 <div id="card-container" onclick="flip()">
                     <div id="main"></div>
                     <div id="main-alt" style="display:none"></div>
@@ -57,22 +57,26 @@
                 <button id="conf-no" onclick="">No</button>
             </div>
             
-            <div id="options">
-                <span id="lows" class="off" onclick="toggleOption(this)">Lows</span>
-                <span id="random" class="off" onclick="toggleOption(this)">Randomize</span>
-                <span id="highs" class="off" onclick="toggleOption(this)">Highs</span>
+            <div id="options-container">
+                <div id="button-settings" class="button" onclick="toggleOptionsShow()"><img src="settings.png" alt="settings" /></div>
+                <div id="options" style="display:none">
+                    <span id="lows" class="off" onclick="toggleOption(this)">Lows</span>
+                    <span id="random" class="off" onclick="toggleOption(this)">Randomize</span>
+                    <span id="highs" class="off" onclick="toggleOption(this)">Highs</span>
+                    <div id="reset" class="button" onclick="reset()">reset</div>
+                </div>
             </div>
-            <button id="reset" onclick="reset()">Clear all</button>
+            
             
             <div id="bottom-panel">
                 <div id="button-prev" class="button" onclick="prev()">&laquo;</div>
                 <div id="point-down" class="button" onclick="pointDown()">-1</div>
                 <div id="point-up" class="button" onclick="pointUp()">+1</div>
-                <div id="button-next" class="button" onclick="next()">&raquo;</div>
+                <div id="button-next" class="button last" onclick="next()">&raquo;</div>
             </div>
             
             <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
-            <span id="version">version 0.3.4</span>
+            <span id="version">version 0.3.5</span>
         </div>
         
         <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>

@@ -1,10 +1,8 @@
 CACHE MANIFEST
-# rev 0.3.4
+# rev 0.3.5
 index.html
 flashcards.js
 main.css
 iphone.css
 modernizr.js
-icon-add.gif
-icon-delete.gif
-icon-edit.png
+settings.png

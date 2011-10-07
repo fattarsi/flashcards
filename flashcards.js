@@ -229,7 +229,6 @@ function navShow(){
   show('button-delete');
   show('button-edit');
   show('meter');
-  show('options');
   show('stats');
 }
 
@@ -293,6 +292,7 @@ function reset() {
   document.getElementById('conf-msg').innerHTML = 'Are you sure you want to reset everything?';
   document.getElementById('conf-yes').onclick = resetYes;
   document.getElementById('conf-no').onclick = resetNo;
+  hide('msg-container');
   show('conf');
   document.getElementById('conf-no').focus();
 }
@@ -441,6 +441,10 @@ function toggleOptionsOff() {
   document.getElementById('lows').className = 'off';
   document.getElementById('highs').className = 'off';
   document.getElementById('random').className = 'off';
+}
+
+function toggleOptionsShow() {
+  toggle('options');
 }
 
 //update a single card in localstorage
