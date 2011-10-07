@@ -229,6 +229,7 @@ function navShow(){
   show('button-delete');
   show('button-edit');
   show('meter');
+  show('options-container');
   show('stats');
 }
 
@@ -238,7 +239,7 @@ function navHide() {
   hide('button-delete');
   hide('button-edit');
   hide('meter');
-  hide('options');
+  hide('options-container');
   hide('stats');
 }
 
@@ -433,7 +434,6 @@ function toggleOption(elm) {
         break;
     }
   }
-  
   updateMain();
 }
 
@@ -445,6 +445,13 @@ function toggleOptionsOff() {
 
 function toggleOptionsShow() {
   toggle('options');
+  //change container class to show state
+  var elm = document.getElementById('options-container');
+  if (elm.className == 'on') {
+    elm.className = 'off';
+  } else {
+    elm.className = 'on';
+  }
 }
 
 //toggles option that controls which card is shown first, 1 or 2
@@ -457,7 +464,6 @@ function toggleReverseMode() {
   } else {
     elm.className = 'off';
   }
-  
   updateMain();
 }
 

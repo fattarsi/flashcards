@@ -192,6 +192,13 @@ a:link, a:visited {
         color:#000;        
     }
 
+#options-container.on {
+    background-color:#eee;
+}
+
+#options-container.off {
+    background-color:#fff;
+}
 
 #phrase-form {
     position:absolute;
