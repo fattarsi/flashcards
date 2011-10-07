@@ -447,6 +447,20 @@ function toggleOptionsShow() {
   toggle('options');
 }
 
+//toggles option that controls which card is shown first, 1 or 2
+//reverse mode == true shows 2 first
+function toggleReverseMode() {
+  var elm = document.getElementById('reverse');
+  REVERSE_MODE = !(elm.className == 'on');
+  if (REVERSE_MODE) {
+    elm.className = 'on';
+  } else {
+    elm.className = 'off';
+  }
+  
+  updateMain();
+}
+
 //update a single card in localstorage
 function updateCard() {
   var s = JSON.stringify(CARD,null,2);
@@ -493,8 +507,13 @@ function updateMain() {
   CARD = JSON.parse(localStorage[CARDS[INDEX]]);
   CARD.save = updateCard;
 
-  document.getElementById('main').innerHTML = CARD['1'];
-  document.getElementById('main-alt').innerHTML = CARD['2'];
+  if (REVERSE_MODE) {
+    document.getElementById('main').innerHTML = CARD['2'];
+    document.getElementById('main-alt').innerHTML = CARD['1'];
+  } else {
+    document.getElementById('main').innerHTML = CARD['1'];
+    document.getElementById('main-alt').innerHTML = CARD['2'];    
+  }
 
   document.getElementById('meter').value = CARD['points'];
   document.getElementById('meter').innerHTML = CARD['points'];

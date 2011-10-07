@@ -135,10 +135,11 @@ a:link, a:visited {
         padding:5px;
         border-left:1px solid #000;
         border-top:1px solid #000;
+        border-right:1px solid #000;
     }
     
     #main-container .last {
-        border-right:1px solid #000;
+        border-left:0px solid #000;
     }
 
 #meter {

@@ -19,7 +19,7 @@
             <div id="main-container">
                 <span id="button-add" class="button" onclick="add()">add</span>
                 <span id="button-edit" class="button last" onclick="edit()">edit</span>
-                <span id="button-delete" class="button last" onclick="del()">delete</span>
+                <span id="button-delete" class="button" onclick="del()">delete</span>
                 <div id="card-container" onclick="flip()">
                     <div id="main"></div>
                     <div id="main-alt" style="display:none"></div>
@@ -61,8 +61,9 @@
                 <div id="button-settings" class="button" onclick="toggleOptionsShow()"><img src="settings.png" alt="settings" /></div>
                 <div id="options" style="display:none">
                     <span id="lows" class="off" onclick="toggleOption(this)">Lows</span>
-                    <span id="random" class="off" onclick="toggleOption(this)">Randomize</span>
                     <span id="highs" class="off" onclick="toggleOption(this)">Highs</span>
+                    <span id="random" class="off" onclick="toggleOption(this)">Randomize</span>
+                    <span id="reverse" class="off" onclick="toggleReverseMode()">Reverse</span>
                     <div id="reset" class="button" onclick="reset()">reset</div>
                 </div>
             </div>
@@ -76,7 +77,7 @@
             </div>
             
             <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
-            <span id="version">version 0.3.5</span>
+            <span id="version">version 0.3.6</span>
         </div>
         
         <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>
@@ -87,6 +88,7 @@
             var CARDS; //array of card keys
             var INDEX = -1; //current index in array
             var OPTION_MODE = false;
+            var REVERSE_MODE = false;
             
             initCards();
             
