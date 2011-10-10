@@ -100,7 +100,7 @@ a:link, a:visited {
     width:460px;
     height:280px;
     margin:auto;
-    border:1px dashed #000;
+    border:1px outset;
 }
 
 #credits {
