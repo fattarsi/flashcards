@@ -1,8 +1,10 @@
 CACHE MANIFEST
-# rev 0.3.6 
+# rev 0.4
+card.js
+controller.js
+deck.js
 index.html
-flashcards.js
-main.css
 iphone.css
+main.css
 modernizr.js
 settings.png

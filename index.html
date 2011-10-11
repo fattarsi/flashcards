@@ -81,7 +81,9 @@
         </div>
         
         <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>
-        <script src="flashcards.js" type="text/javascript" charset="utf-8"></script>
+        <script src="controller.js" type="text/javascript" charset="utf-8"></script>
+        <script src="deck.js" type="text/javascript" charset="utf-8"></script>
+        <script src="card.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" charset="utf-8">        
             //Globals
             var CARD; //the current card
@@ -90,7 +92,7 @@
             var OPTION_MODE = false;
             var REVERSE_MODE = false;
             
-            initCards();
+            initDeck();
             
             //Capture key events
             document.onkeydown = checkHotkey;
