@@ -63,6 +63,14 @@ Deck.prototype.deleteCard = function () {
     //rm from index arrays
     this.master_set.splice(this.master_set.indexOf(this.currentKey()),1);
     this.cards.splice(this.index, 1);
+    
+    //if any filter options are on, it is possible that the list is empty now
+    //if so, restore master_set and clear options
+    if (this.cards <= 0) {
+        this.cards = this.master_set.slice();
+        this.mode_high = false;
+        this.mode_low = false;
+    }
     this.save();
 }
 

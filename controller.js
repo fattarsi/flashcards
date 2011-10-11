@@ -326,7 +326,7 @@ function updateDisplay() {
         document.getElementById('meter').innerHTML = card.points;
         document.getElementById('key').value = card.key;
         
-        setStats((DECK.index+1) + '/' + DECK.length());
+        setStats((DECK.index+1) + ' / ' + DECK.length());
     }
     
     updateOptions();
