@@ -40,7 +40,7 @@
                 </div><!-- add-form -->
                 <div id="add-another" style="display:none">
                     <button id="button-add-another" onclick="add()">Add another?</button>
-                    <button onclick="closeAddAnother()">Nope</button>
+                    <button onclick="cancel()">Done</button>
                 </div><!-- add-another -->
                 <div id="stats"></div>
                 <div id="meter"></div>
@@ -63,7 +63,7 @@
                     <span id="lows" class="off" onclick="toggleOption(this)">Lows</span>
                     <span id="highs" class="off" onclick="toggleOption(this)">Highs</span>
                     <span id="random" class="off" onclick="toggleOption(this)">Randomize</span>
-                    <span id="reverse" class="off" onclick="toggleReverseMode()">Reverse</span>
+                    <span id="reverse" class="off" onclick="toggleOption(this)">Reverse</span>
                     <div id="reset" class="button" onclick="reset()">reset</div>
                 </div>
             </div>
@@ -77,21 +77,15 @@
             </div>
             
             <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
-            <span id="version">version 0.3.6</span>
+            <span id="version">version 0.4</span>
         </div>
         
         <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>
-        <script src="controller.js" type="text/javascript" charset="utf-8"></script>
-        <script src="deck.js" type="text/javascript" charset="utf-8"></script>
         <script src="card.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript" charset="utf-8">        
-            //Globals
-            var CARD; //the current card
-            var CARDS; //array of card keys
-            var INDEX = -1; //current index in array
-            var OPTION_MODE = false;
-            var REVERSE_MODE = false;
-            
+        <script src="deck.js" type="text/javascript" charset="utf-8"></script>
+        <script src="controller.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script type="text/javascript" charset="utf-8">
             initDeck();
             
             //Capture key events
