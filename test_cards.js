@@ -1,6 +1,8 @@
 /*
  * test_card.js
  * Test for the Card class
+ * Test case for Google-JS-Test http://code.google.com/p/google-js-test/
+ * command: gjstest --js_files=card.js,test_cards.js,deck.js,test_deck.js
  */
  
  var localStorage = new Object();
@@ -34,6 +36,9 @@
   expectEq('hello', card.phrase1);
   expectEq('hola',card.phrase2);
   expectEq(0, card.points);
+ }
+  
+CardTest.prototype.CardOps = function() {
   
   //open existing card, modify, save, and re-open
   var card = new Card({'key':'cf'});

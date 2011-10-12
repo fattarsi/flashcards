@@ -64,8 +64,8 @@ Deck.prototype.deleteCard = function () {
     this.master_set.splice(this.master_set.indexOf(this.currentKey()),1);
     this.cards.splice(this.index, 1);
     
-    //if any filter options are on, it is possible that the list is empty now
-    //if so, restore master_set and clear options
+    //if any filter options are on, and the list is empty
+    //restore master_set and clear options
     if (this.cards <= 0) {
         this.cards = this.master_set.slice();
         this.mode_high = false;
@@ -79,24 +79,20 @@ Deck.prototype.length = function  () {
     return this.cards.length;
 }
 
-//return the next card and advance the index
+//update index to next card
 Deck.prototype.next = function () {
     this.index +=1;
     if (this.index >= this.length()) {
       this.index = 0;
     }
-  
-    return this.current();
 }
 
-//return the previous card and update the index
+//update index to previous card
 Deck.prototype.prev = function () {
     this.index -= 1;
     if (this.index < 0) {
       this.index = this.length() - 1;
     }
-  
-    return this.current();
 }
 
 //set the cards array based on mode_* options

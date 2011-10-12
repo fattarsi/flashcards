@@ -43,8 +43,7 @@ Card.prototype.save = function () {
 }
 
 
-// return a random string that is not currently used in localStorage
-// as a key
+// return a random string that is not currently used in localStorage as a key
 function makeKey() {
     var text = "";
     var max = 10;
