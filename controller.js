@@ -85,8 +85,11 @@ function edit() {
 
 //display alternate phrase
 function flip() {
-    toggle('main');
-    toggle('main-alt');
+    $('#main').toggle("slide", { direction: "up" }, 200);
+    $('#main-alt').toggle("slide", {direction: "down"}, 200);
+    
+    //toggle('main');
+    //toggle('main-alt');
 }
 
 function flipReset() {
@@ -163,7 +166,18 @@ function navHide() {
 //display next card
 function next() {
     DECK.next();
+    $('#main').hide("slide", { direction: "left" }, 200);
     updateDisplay();
+}
+
+function options() {
+    show('modal-container');
+    show('phrase-form');
+}
+
+function optionsClose() {
+    hide('modal-container');
+    hide('phrase-form');
 }
 
 //adjust point of card
@@ -184,7 +198,8 @@ function pointUp() {
 //display previous card
 function prev() {
     DECK.prev();
-    updateDisplay();
+    $('#main').hide("slide", { direction: "right" }, 200);
+    updateDisplay({'direction':'left'});
 }
 
 function reset() {
@@ -255,6 +270,12 @@ function show(id) {
   document.getElementById(id).style.display = '';
 }
 
+//shuffles the deck
+function shuffle() {
+    DECK.shuffle();
+    updateDisplay();
+}
+
 //show a message dialog
 function setMsg(msg) {
   document.getElementById('msg').innerHTML = msg;
@@ -307,29 +328,34 @@ function toggleOptionsShow() {
 }
 
 //set display for the current card
-function updateDisplay() {
+function updateDisplay(opts) {
+    if (opts == undefined) {
+        opts = {'direction':'right'};
+    }
     flipReset();
     hide('conf');
     var card = DECK.current();
     if (!card) {
         // set help text for first run.
-        navHide();
+        //navHide();
         setMsg('Click on messages to close.');
         document.getElementById('main').innerHTML = 'Click here to toggle';
         document.getElementById('main-alt').innerHTML = 'Now add some';
         document.getElementById('button-add').focus();
         show('card-container');
     } else {
-        navShow();
+        //navShow();
         document.getElementById('main').innerHTML = card.phrase1;
         document.getElementById('main-alt').innerHTML = card.phrase2;
-        document.getElementById('meter').innerHTML = card.points;
+        //document.getElementById('meter').innerHTML = card.points;
         document.getElementById('key').value = card.key;
         
         setStats((DECK.index+1) + ' / ' + DECK.length());
     }
     
-    updateOptions();
+    $('#main').show("slide", { direction: opts['direction'] }, 200);
+    
+    //updateOptions();
     
 }
 

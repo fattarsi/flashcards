@@ -1,4 +1,4 @@
-Flashcards v0.4
+Flashcards v0.5
 
 A simple HTML5 app that features:
  * Add / Edit / Delete flashcards through the frontend
@@ -6,17 +6,13 @@ A simple HTML5 app that features:
  * Works offline
  * Separate css for iphone or small screens
  * Detects iphone screen orientation and updates style
- * Point feature for each card to track which cards you need to work more on
  * Randomize feature to study cards in a different order
 
 Try it out at: http://fattarsi.com/m/html5/flashcards/
 
 Recent development changes:
+ * Simplified interface
+ * Look like actual cards
  * Javascript re-written as object-oriented
  * Reverse mode to study cards back-to-front
  * Style updates for mobile devices
- * Clean up display, uniform button style
- * Default text for first time visitors and after a reset
- * Randomize now creates a new temporary list so prev/next work
- * High/low point filters
- * Some bug fixes

@@ -17,13 +17,14 @@
     <body>
         <div id="container">
             <div id="main-container">
-                <span id="button-add" class="button" onclick="add()">add</span>
-                <span id="button-edit" class="button last" onclick="edit()">edit</span>
-                <span id="button-delete" class="button" onclick="del()">delete</span>
                 <div id="card-container" onclick="flip()">
                     <div id="main"></div>
                     <div id="main-alt" style="display:none"></div>
                 </div><!-- card-container -->
+                <div style="clear:both"></div>
+            </div><!-- main-container -->
+            <div id="modal-container" style="display:none">
+                <span id="modal-container-close" class="button" onclick="optionsClose()">close</span>
                 <div id="phrase-form" style="display:none">
                     <form action="" onsubmit="return false;">
                         <label for="phrase-1">Phrase 1:</label>
@@ -37,15 +38,17 @@
                         <button id="button-save" type="submit" onclick="save()">Save</button>
                         <button type="button" onclick="cancel()">Cancel</button>
                     </form>
-                </div><!-- add-form -->
+                </div><!-- phrase-form -->
                 <div id="add-another" style="display:none">
                     <button id="button-add-another" onclick="add()">Add another?</button>
                     <button onclick="cancel()">Done</button>
                 </div><!-- add-another -->
-                <div id="stats"></div>
-                <div id="meter"></div>
                 <div style="clear:both"></div>
-            </div><!-- main-container -->
+                
+            </div><!-- end modal-container -->
+            
+            <div id="button-prev" class="button" onclick="prev()"></div>
+            <div id="button-next" class="button" onclick="next()"></div>
             
             <div id="msg-container" style="display:none">
                 <span id="msg" onclick="msgClose()"></span>
@@ -58,29 +61,23 @@
             </div>
             
             <div id="options-container">
-                <div id="button-settings" class="button" onclick="toggleOptionsShow()"><img src="settings.png" alt="settings" /></div>
-                <div id="options" style="display:none">
-                    <span id="lows" class="off" onclick="toggleOption(this)">Lows</span>
-                    <span id="highs" class="off" onclick="toggleOption(this)">Highs</span>
-                    <span id="random" class="off" onclick="toggleOption(this)">Randomize</span>
-                    <span id="reverse" class="off" onclick="toggleOption(this)">Reverse</span>
-                    <div id="reset" class="button" onclick="reset()">reset</div>
+                <div id="button-shuffle" class="button" onclick="shuffle()"></div>
+                <div id="options">
+                    <div id="stats">0 / 0</div>
+                    <div id="button-options" class="button" onclick="options()">options</div>
                 </div>
             </div>
             
             
-            <div id="bottom-panel">
-                <div id="button-prev" class="button" onclick="prev()">&laquo;</div>
-                <div id="point-down" class="button" onclick="pointDown()">-1</div>
-                <div id="point-up" class="button" onclick="pointUp()">+1</div>
-                <div id="button-next" class="button last" onclick="next()">&raquo;</div>
-            </div>
+            
             
             <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
             <span id="version">version 0.4</span>
         </div>
         
-        <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/modernizr.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
         <script src="card.js" type="text/javascript" charset="utf-8"></script>
         <script src="deck.js" type="text/javascript" charset="utf-8"></script>
         <script src="controller.js" type="text/javascript" charset="utf-8"></script>

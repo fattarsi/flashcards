@@ -11,6 +11,7 @@ function Deck(key) {
     //this.index = (d.index) ? d.index : 0;
     this.index = 0;
     //master_set contains all cards in order that they were added
+    //this might get deprecated, might just use a single list
     this.master_set = (d.master_set) ? d.master_set : new Array();
     //this.cards = (d.cards) ? d.cards : new Array();
     //cards is the current ordering based on mutation options (random, low/high)
@@ -124,8 +125,13 @@ Deck.prototype.processOptions = function () {
     }
     
     if (this.mode_random) {
-        this.cards.sort(function() {return 0.5 - Math.random()});
+        this.shuffle();
     }
+}
+
+//mixes up order of cards
+Deck.prototype.shuffle = function () {
+    this.cards.sort(function() {return 0.5 - Math.random()});
 }
 
 //save this deck in localstorage
