@@ -24,7 +24,12 @@
                 <div style="clear:both"></div>
             </div><!-- main-container -->
             <div id="modal-container" style="display:none">
-                <span id="modal-container-close" class="button" onclick="optionsClose()">close</span>
+                <span id="modal-container-close" class="button" onclick="optionsClose()"></span>
+                <div id="option-container" style="display:none">
+                    <div id="option-edit" onclick="edit()"></div>
+                    <div id="option-add" onclick="add()"></div>
+                    <div id="option-del" onclick="del()"></div>
+                </div>
                 <div id="phrase-form" style="display:none">
                     <form action="" onsubmit="return false;">
                         <label for="phrase-1">Phrase 1:</label>
@@ -36,14 +41,15 @@
                         <input id="key" type="hidden" />
                         
                         <button id="button-save" type="submit" onclick="save()">Save</button>
-                        <button type="button" onclick="cancel()">Cancel</button>
                     </form>
                 </div><!-- phrase-form -->
                 <div id="add-another" style="display:none">
                     <button id="button-add-another" onclick="add()">Add another?</button>
-                    <button onclick="cancel()">Done</button>
+                    <button onclick="optionsClose()">Done</button>
                 </div><!-- add-another -->
                 <div style="clear:both"></div>
+                
+
                 
             </div><!-- end modal-container -->
             
@@ -58,7 +64,7 @@
                 <span id="conf-msg"></span>
                 <button id="conf-yes" onclick="">Yes</button>
                 <button id="conf-no" onclick="">No</button>
-            </div>
+            </div><!-- end conf -->
             
             <div id="options-container">
                 <div id="button-shuffle" class="button" onclick="shuffle()"></div>
@@ -72,7 +78,7 @@
             
             
             <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
-            <span id="version">version 0.4</span>
+            <span id="version">version 0.5</span>
         </div>
         
         <script src="js/modernizr.js" type="text/javascript" charset="utf-8"></script>

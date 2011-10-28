@@ -13,6 +13,7 @@ if (!Modernizr.localstorage) {
 
 //show add form
 function add() {
+  hide('option-container');
   hotkeyDisable();
   document.getElementById('key').value = '';
   document.getElementById('button-save').onclick = save;
@@ -28,6 +29,7 @@ function cancel() {
   hotkeyEnable();
   resetDisplay();
   show('card-container');
+  hide('option-container');
   updateDisplay();
 }
 
@@ -57,11 +59,11 @@ function del() {
   document.getElementById('conf-yes').onclick = delYes;
   document.getElementById('conf-no').onclick = delNo;
   hide('msg-container');
+  optionsClose();
   show('conf');
 }
 
 function delNo() {
-  setMsg('Delete canceled');
   hide('conf');
 }
 
@@ -170,12 +172,26 @@ function next() {
     updateDisplay();
 }
 
+//hide edit/del options
+function optionHide() {
+    hide('option-del');
+    hide('option-edit');
+}
+
+//show edit/del options
+function optionShow() {
+    show('option-del');
+    show('option-edit');
+}
+
 function options() {
     show('modal-container');
-    show('phrase-form');
+    show('option-container');
+    hide('phrase-form');
 }
 
 function optionsClose() {
+    cancel();
     hide('modal-container');
     hide('phrase-form');
 }
@@ -215,6 +231,7 @@ function reset() {
 function resetDisplay() {
   hide('add-another');
   hide('card-container');
+  hide('option-container');
   hide('phrase-form');
 }
 
@@ -338,6 +355,8 @@ function updateDisplay(opts) {
     if (!card) {
         // set help text for first run.
         //navHide();
+        //hide edit/del options when there are 0 cards
+        optionHide();
         setMsg('Click on messages to close.');
         document.getElementById('main').innerHTML = 'Click here to toggle';
         document.getElementById('main-alt').innerHTML = 'Now add some';
@@ -345,6 +364,7 @@ function updateDisplay(opts) {
         show('card-container');
     } else {
         //navShow();
+        optionShow();
         document.getElementById('main').innerHTML = card.phrase1;
         document.getElementById('main-alt').innerHTML = card.phrase2;
         //document.getElementById('meter').innerHTML = card.points;

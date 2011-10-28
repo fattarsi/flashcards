@@ -16,6 +16,15 @@ body[orient="portrait"] #bottom-panel {
     height:70px;
 }
 
+body[orient="portrait"] #card-container {
+    cursor:pointer;
+    overflow:auto;
+    font-size:24px;
+    text-align:center;
+    color:#000;
+    font-family:'chalkduster', sans-serif;
+}
+
 body[orient="portrait"] #conf {
     position:absolute;
     top:30px;
@@ -27,20 +36,32 @@ body[orient="portrait"] #conf {
 body[orient="portrait"] #container {
     position:relative;
     width:295px;
-    height:440px;
+    height:290px;
     border:1px outset;
+    background:url('background.png') repeat-x;
 }
 
 body[orient="portrait"] #main-container {
     position:absolute;
-    top:135px;
-    left:2px;
+    top:90px;
+    left:10px;
     cursor:pointer;
     margin:auto;
-    width:290px;
-    border:1px solid #000;
+    width:270px;
     font-size:12px;
     text-align:center;
+}
+
+body[orient="portrait"] #modal-container {
+    position:absolute;
+    top:5px;
+    left:5px;
+    z-index:100;
+    color:#000;
+    width:280px;
+    height:270px;
+    border:1px outset;
+    background-color:rgba(255,255,255,.98);
 }
 
 body[orient="portrait"] #msg-container {
@@ -51,20 +72,24 @@ body[orient="portrait"] #msg-container {
     border:0px;
 }
 
+body[orient="portrait"] #option-container {
+    position:absolute;
+    top:122px;
+    left:60px;
+    background:#fff;
+}
+
 body[orient="portrait"] #options {
     position:absolute;
-    bottom:2px;
-    left:60px;
-    width:170px;
-    height:20px;
-    text-align:center;
-    padding-bottom:1px;
+    top:8px;
+    left:105px;
+    width:190px;
+    padding-bottom:5px;
 }
 
 body[orient="portrait"] #phrase-form {
     position:absolute;
-    top:5px;
-    left:20px;
+    top:122px;
+    left:25px;
     width:250px;
-    min-height:50px;
 }

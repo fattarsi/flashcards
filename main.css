@@ -30,8 +30,8 @@ a:link, a:visited {
 
 #add-another {
     position:absolute;
-    top:28px;
-    left:124px;
+    top:120px;
+    left:147px;
 }
 
 #button-add {
@@ -142,14 +142,18 @@ a:link, a:visited {
 }
 
 #main {
-    padding:40px;
+    width:100%;
+    height:37%;
+    padding:35px 0px;
 }
 
 #main-alt {
     position:absolute;
     top:0px;
-    left:111px;
-    padding:40px;
+    left:0px;
+    width:100%;
+    height:37%;
+    padding:35px 0px;
 }
 
 #main-container {
@@ -182,14 +186,16 @@ a:link, a:visited {
     width:450px;
     height:270px;
     border:1px outset;
-    background-color:rgba(255,255,255,.95);
+    background-color:rgba(255,255,255,.98);
 }
 
 #modal-container-close {
     position:absolute;
     top:2px;
     right:2px;
-    border:1px solid #000;
+    width:24px;
+    height:24px;
+    background-image:url('close.png');
 }
 
 #meter {
@@ -239,10 +245,41 @@ a:link, a:visited {
     background-color:#fff;
 }
 
+#option-container {
+    position:absolute;
+    top:122px;
+    left:139px;
+    background:#fff;
+}
+
+    #option-container div{
+        cursor:pointer;
+        float:left;
+        margin:0px 8px;
+    }
+
+#option-add {
+    width:36px;
+    height:36px;
+    background:url('buttons.png') -127px -54px;
+}
+
+#option-del {
+    width:36px;
+    height:36px;
+    background:url('buttons.png') -168px -54px;
+}
+
+#option-edit {
+    width:36px;
+    height:36px;
+    background:url('buttons.png') -88px -52px;  
+}
+
 #phrase-form {
     position:absolute;
-    top:7px;
-    left:90px;
+    top:96px;
+    left:119px;
     width:230px;
 }
 
