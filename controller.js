@@ -87,9 +87,13 @@ function edit() {
 
 //display alternate phrase
 function flip() {
-    $('#main').toggle("slide", { direction: "up" }, 200);
-    $('#main-alt').toggle("slide", {direction: "down"}, 200);
-    
+    if (document.getElementById('main').style.display == 'none') {
+        $('#main-alt').toggle("slide", { direction: "down" }, 300);
+        setTimeout("$('#main').toggle('slide', {direction: 'up'}, 300)",300);        
+    } else {
+        $('#main').toggle("slide", { direction: "up" }, 300);
+        setTimeout("$('#main-alt').toggle('slide', {direction: 'down'}, 300)",300);
+    }
     //toggle('main');
     //toggle('main-alt');
 }
@@ -168,7 +172,7 @@ function navHide() {
 //display next card
 function next() {
     DECK.next();
-    $('#main').hide("slide", { direction: "left" }, 200);
+    $('#main').hide("slide", { direction: "left" }, 300);
     updateDisplay();
 }
 
