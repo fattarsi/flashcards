@@ -8,6 +8,16 @@ body {
     color:#bdbdbd;
 }
 
+html {
+    -webkit-tap-highlight-color:transparent;
+}
+
+input {
+    height:20px;
+    background:#eea;
+    margin:5px 0px;
+}
+
 @font-face {
     font-family: "chalkduster";
     src: url(Chalkduster.ttf) format("truetype");

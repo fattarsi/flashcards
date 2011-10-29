@@ -16,7 +16,7 @@ function add() {
   hide('option-container');
   hotkeyDisable();
   document.getElementById('key').value = '';
-  document.getElementById('button-save').onclick = save;
+  //document.getElementById('button-save').onclick = save;
   resetDisplay();
   show('phrase-form');
   document.getElementById('phrase-1').focus();
@@ -281,6 +281,7 @@ function save() {
   show('add-another');
   document.getElementById('button-add-another').focus();
   hotkeyEnable();
+  setTimeout("msgClose()", 5000);
 }
 
 function show(id) {
@@ -357,7 +358,6 @@ function updateDisplay(opts) {
         //navHide();
         //hide edit/del options when there are 0 cards
         optionHide();
-        setMsg('Click on messages to close.');
         document.getElementById('main').innerHTML = 'Click here to toggle';
         document.getElementById('main-alt').innerHTML = 'Now add some';
         document.getElementById('button-add').focus();
