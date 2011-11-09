@@ -4,6 +4,7 @@
  */
 
 // Contoller globals
+var ANIMATIONS = true;
 var DECK;
 
 //check for proper html5 support
@@ -88,15 +89,18 @@ function edit() {
 
 //display alternate phrase
 function flip() {
-    if (document.getElementById('main').style.display == 'none') {
-        $('#main-alt').toggle("slide", { direction: "down" }, 300);
-        setTimeout("$('#main').toggle('slide', {direction: 'up'}, 300)",300);      
+    if (ANIMATIONS) {
+        if (document.getElementById('main').style.display == 'none') {
+            $('#main-alt').toggle("slide", { direction: "down" }, 300);
+            setTimeout("$('#main').toggle('slide', {direction: 'up'}, 300)",300);      
+        } else {
+            $('#main').toggle("slide", { direction: "up" }, 300);
+            setTimeout("$('#main-alt').toggle('slide', {direction: 'down'}, 300)",300);
+        }
     } else {
-        $('#main').toggle("slide", { direction: "up" }, 300);
-        setTimeout("$('#main-alt').toggle('slide', {direction: 'down'}, 300)",300);
+        toggle('main');
+        toggle('main-alt');
     }
-    //toggle('main');
-    //toggle('main-alt');
 }
 
 function flipReset() {
@@ -173,7 +177,11 @@ function navHide() {
 //display next card
 function next() {
     DECK.next();
-    $('#main').hide("slide", { direction: "left" }, 300);
+    if (ANIMATIONS) {
+        $('#main').hide("slide", { direction: "left" }, 300);
+    } else {
+        hide('main');
+    }
     updateDisplay();
 }
 
@@ -219,7 +227,12 @@ function pointUp() {
 //display previous card
 function prev() {
     DECK.prev();
-    $('#main').hide("slide", { direction: "right" }, 200);
+    if (ANIMATIONS) {
+        $('#main').hide("slide", { direction: "right" }, 200);
+    } else {
+        hide('main');
+    }
+    
     updateDisplay({'direction':'left'});
 }
 
@@ -334,7 +347,10 @@ function toggleOption(elm) {
       case 'highs':
         DECK.toggleHigh();
         break;
-      case 'option-reverse':
+      case 'option-animation-box':
+        ANIMATIONS = (ANIMATIONS) ? false : true;
+        break;
+      case 'option-reverse-box':
         DECK.toggleReverse();
         break;
     }
@@ -383,9 +399,18 @@ function updateDisplay(opts) {
     }
     
     if (DECK.mode_reverse) {
-        $('#main-alt').show("slide", { direction: opts['direction'] }, 200);
+        if (ANIMATIONS) {
+            $('#main-alt').show("slide", { direction: opts['direction'] }, 200);
+        } else {
+            show('main-alt');
+        }
+        
     } else {
-        $('#main').show("slide", { direction: opts['direction'] }, 200);
+        if (ANIMATIONS) {
+            $('#main').show("slide", { direction: opts['direction'] }, 200);
+        } else {
+            show('main');
+        }
     }
     
     //updateOptions();

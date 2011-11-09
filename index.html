@@ -29,7 +29,8 @@
                     <div id="option-edit" onclick="edit()"></div>
                     <div id="option-add" onclick="add()"></div>
                     <div id="option-del" onclick="del()"></div>
-                    <div id="option-reverse" onclick="toggleOption(this)"><input id="option-reverse-box" type="checkbox" /> <label for="option-reverse-box">reverse</label></div>
+                    <div id="option-reverse"><input id="option-reverse-box" onclick="toggleOption(this)" type="checkbox" /> <label for="option-reverse-box">reverse</label></div>
+                    <div id="option-animation"><input id="option-animation-box" onclick="toggleOption(this)" type="checkbox" checked="true" /> <label for="option-animation-box">animations</label></div>
                 </div>
                 <div id="phrase-form" style="display:none">
                     <form action="" onsubmit="return false;">
@@ -79,7 +80,7 @@
             
             
             <span id="credits"><a href="http://chrisfattarsi.com/flashcards">chris fattarsi</a></span>
-            <span id="version">version 0.5.4</span>
+            <span id="version">version 0.5.5</span>
         </div>
         
         <script src="js/modernizr.js" type="text/javascript" charset="utf-8"></script>

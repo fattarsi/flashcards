@@ -288,6 +288,12 @@ a:link, a:visited {
     background:url('buttons.png') -88px -52px;  
 }
 
+#option-animation {
+    position:absolute;
+    bottom:-115px;
+    left:-143px;
+}
+
 #option-reverse {
     position:absolute;
     bottom:-115px;

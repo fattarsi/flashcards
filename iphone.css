@@ -44,10 +44,10 @@ body[orient="portrait"] #container {
 body[orient="portrait"] #main-container {
     position:absolute;
     top:90px;
-    left:10px;
+    left:35px;
     cursor:pointer;
     margin:auto;
-    width:270px;
+    width:220px;
     font-size:12px;
     text-align:center;
 }
@@ -77,6 +77,18 @@ body[orient="portrait"] #option-container {
     top:110px;
     left:60px;
     background:#fff;
+}
+
+body[orient="portrait"] #option-animation {
+    position:absolute;
+    bottom:-125px;
+    left:-65px;
+}
+
+body[orient="portrait"] #option-reverse {
+    position:absolute;
+    bottom:-125px;
+    right:-65px;
 }
 
 body[orient="portrait"] #options {
