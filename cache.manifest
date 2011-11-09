@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 0.5.3
+# rev 0.5.4
 background.png
 buttons.png
 card.js
@@ -15,6 +15,8 @@ index.html
 iphone.css
 main.css
 settings.png
+img/next.png
+img/prev.png
 js/modernizr.js
 js/jquery.min.js
 js/jquery-ui.min.js

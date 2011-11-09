@@ -64,20 +64,20 @@ a:link, a:visited {
 
 #button-next {
     position:absolute;
-    top:131px;
+    top:107px;
     right:13px;
-    width:34px;
-    height:34px;
-    background:url('buttons.png') -212px -6px;   
+    width:50px;
+    height:80px;
+    background:url('img/next.png') 6px 25px no-repeat;   
 }
 
 #button-prev {
     position:absolute;
-    top:131px;
+    top:107px;
     left:13px;
-    width:34px;
-    height:34px;
-    background:url('buttons.png') -48px -6px;
+    width:50px;
+    height:80px;
+    background:url('img/prev.png') 6px 25px no-repeat;
 }
 
 #button-shuffle {
@@ -197,6 +197,8 @@ a:link, a:visited {
     height:270px;
     border:1px outset;
     background-color:rgba(255,255,255,.98);
+    font-size:14px;
+    color:#bdbdbd;
 }
 
 #modal-container-close {
@@ -284,6 +286,12 @@ a:link, a:visited {
     width:36px;
     height:36px;
     background:url('buttons.png') -88px -52px;  
+}
+
+#option-reverse {
+    position:absolute;
+    bottom:-115px;
+    right:-161px;
 }
 
 #phrase-form {

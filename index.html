@@ -29,6 +29,7 @@
                     <div id="option-edit" onclick="edit()"></div>
                     <div id="option-add" onclick="add()"></div>
                     <div id="option-del" onclick="del()"></div>
+                    <div id="option-reverse" onclick="toggleOption(this)"><input id="option-reverse-box" type="checkbox" /> <label for="option-reverse-box">reverse</label></div>
                 </div>
                 <div id="phrase-form" style="display:none">
                     <form action="" onsubmit="return false;">
@@ -53,8 +54,8 @@
                 
             </div><!-- end modal-container -->
             
-            <div id="button-prev" class="button" onclick="prev()"></div>
-            <div id="button-next" class="button" onclick="next()"></div>
+            <div id="button-prev" class="button" title="previous" onclick="prev()"></div>
+            <div id="button-next" class="button" title="next" onclick="next()"></div>
             
             <div id="msg-container" style="display:none">
                 <span id="msg" onclick="msgClose()"></span>
@@ -67,7 +68,7 @@
             </div><!-- end conf -->
             
             <div id="options-container">
-                <div id="button-shuffle" class="button" onclick="shuffle()"></div>
+                <div id="button-shuffle" title="shuffle" class="button" onclick="shuffle()"></div>
                 <div id="options">
                     <div id="stats">0 / 0</div>
                     <div id="button-options" class="button" onclick="options()">options</div>
@@ -77,8 +78,8 @@
             
             
             
-            <span id="credits"><a href="http://chrisfattarsi.com">chris fattarsi</a></span>
-            <span id="version">version 0.5.3</span>
+            <span id="credits"><a href="http://chrisfattarsi.com/flashcards">chris fattarsi</a></span>
+            <span id="version">version 0.5.4</span>
         </div>
         
         <script src="js/modernizr.js" type="text/javascript" charset="utf-8"></script>

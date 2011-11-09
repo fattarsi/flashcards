@@ -18,6 +18,7 @@ function add() {
   document.getElementById('key').value = '';
   //document.getElementById('button-save').onclick = save;
   resetDisplay();
+  show('modal-container');
   show('phrase-form');
   document.getElementById('phrase-1').focus();
 }
@@ -89,7 +90,7 @@ function edit() {
 function flip() {
     if (document.getElementById('main').style.display == 'none') {
         $('#main-alt').toggle("slide", { direction: "down" }, 300);
-        setTimeout("$('#main').toggle('slide', {direction: 'up'}, 300)",300);        
+        setTimeout("$('#main').toggle('slide', {direction: 'up'}, 300)",300);      
     } else {
         $('#main').toggle("slide", { direction: "up" }, 300);
         setTimeout("$('#main-alt').toggle('slide', {direction: 'down'}, 300)",300);
@@ -275,7 +276,7 @@ function save() {
     card.save();
     DECK.add(card);
     DECK.save();
-    msg = 'Card added';
+    msg = 'Click options to add / edit / delete cards';
   }
   
   setMsg(msg);
@@ -299,8 +300,14 @@ function shuffle() {
 }
 
 //show a message dialog
-function setMsg(msg) {
-  document.getElementById('msg').innerHTML = msg;
+function setMsg(msg, handler) {
+  var elm = document.getElementById('msg')
+  if (handler) {
+    elm.onclick = handler;
+  } else {
+    elm.onclick = function () {msgClose();};
+  }
+  elm.innerHTML = msg;
   hide('conf');
   show('msg-container');
 }
@@ -327,10 +334,7 @@ function toggleOption(elm) {
       case 'highs':
         DECK.toggleHigh();
         break;
-      case 'random':
-        DECK.toggleRandom();
-        break;
-      case 'reverse':
+      case 'option-reverse':
         DECK.toggleReverse();
         break;
     }
@@ -361,10 +365,11 @@ function updateDisplay(opts) {
         // set help text for first run.
         //navHide();
         //hide edit/del options when there are 0 cards
+        setMsg('click here to add your first card', function () {add();});
         optionHide();
         document.getElementById('main').innerHTML = 'Click here to toggle';
         document.getElementById('main-alt').innerHTML = 'Now add some';
-        document.getElementById('button-add').focus();
+        //document.getElementById('button-add').focus();
         show('card-container');
     } else {
         //navShow();
@@ -377,7 +382,11 @@ function updateDisplay(opts) {
         setStats((DECK.index+1) + ' / ' + DECK.length());
     }
     
-    $('#main').show("slide", { direction: opts['direction'] }, 200);
+    if (DECK.mode_reverse) {
+        $('#main-alt').show("slide", { direction: opts['direction'] }, 200);
+    } else {
+        $('#main').show("slide", { direction: opts['direction'] }, 200);
+    }
     
     //updateOptions();
     

@@ -1,4 +1,4 @@
-Flashcards v0.5.3
+Flashcards v0.5.4
 
 A simple HTML5 app that features:
  * Add / Edit / Delete flashcards through the frontend
@@ -7,10 +7,12 @@ A simple HTML5 app that features:
  * Separate css for iphone or small screens
  * Detects iphone screen orientation and updates style
  * Randomize feature to study cards in a different order
+ * Study cards back-to-front or front-to-back
 
-Try it out at: http://fattarsi.com/m/html5/flashcards/
+Try it out at: http://fattarsi.com/flashcards/
 
 Recent development changes:
+ * Reverse mode added in options menu
  * Simplified interface
  * Look like actual cards
  * Javascript re-written as object-oriented
