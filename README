@@ -1,4 +1,4 @@
-Flashcards v0.5.5
+Flashcards v0.5.6
 
 A simple HTML5 app that features:
  * Add / Edit / Delete flashcards through the frontend
@@ -13,6 +13,7 @@ Try it out at: http://fattarsi.com/flashcards/
 
 Recent development changes:
  * Reverse mode added in options menu
+ * Option to disable animations
  * Simplified interface
  * Look like actual cards
  * Javascript re-written as object-oriented

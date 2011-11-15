@@ -7,7 +7,14 @@
 //deck constructor
 function Deck(key) {
     this.key = key;
-    var d = (localStorage[key]) ? JSON.parse(localStorage[key]) : {} ;
+    var d;
+    //load saved state or set defaults
+    if (localStorage[key]) {
+        d = JSON.parse(localStorage[key]);
+    } else {
+        d = {};
+        d.mode_animations = true;
+    }
     //this.index = (d.index) ? d.index : 0;
     this.index = 0;
     //master_set contains all cards in order that they were added
@@ -16,8 +23,7 @@ function Deck(key) {
     //this.cards = (d.cards) ? d.cards : new Array();
     //cards is the current ordering based on mutation options (random, low/high)
     this.cards = this.master_set.slice();
-    this.mode_low = false;
-    this.mode_high = false;
+    this.mode_animations = (d.mode_animations) ? d.mode_animations : false;
     this.mode_random = (d.mode_random) ? d.mode_random : false;
     this.mode_reverse = (d.mode_reverse) ? d.mode_reverse : false;
     
@@ -69,8 +75,6 @@ Deck.prototype.deleteCard = function () {
     //restore master_set and clear options
     if (this.cards <= 0) {
         this.cards = this.master_set.slice();
-        this.mode_high = false;
-        this.mode_low = false;
     }
     this.save();
 }
@@ -98,35 +102,7 @@ Deck.prototype.prev = function () {
 
 //set the cards array based on mode_* options
 Deck.prototype.processOptions = function () {
-    //sanity check that both high and low are not set, if so set none
-    if (this.mode_high && this.mode_low) {
-        this.mode_high = this.mode_low = false;
-    }
-    
-    this.cards = this.master_set.slice();
-    
-    if (this.mode_high || this.mode_low) {
-        this.cards = new Array();
-        for (var i=0; i<this.master_set.length; i++) {
-            var c = new Card({'key':this.master_set[i]});
-            if (this.mode_high && (c.points > 0)) {
-                this.cards.push(c.key);
-            } else if (this.mode_low && c.points <= 0) {
-                this.cards.push(c.key);
-            }
-        }
-        
-        //if none were returned, turn option off and return master_set
-        if (this.cards.length <= 0) {
-            this.cards = this.master_set.slice();
-            this.mode_high = false;
-            this.mode_low = false;
-        }
-    }
-    
-    if (this.mode_random) {
-        this.shuffle();
-    }
+    this.save();
 }
 
 //mixes up order of cards
@@ -139,19 +115,9 @@ Deck.prototype.save = function () {
     localStorage[this.key] = JSON.stringify(this,null,2);
 }
 
-//toggle the mode_high option
-//setting high will unset low
-Deck.prototype.toggleHigh = function () {
-    this.mode_high = (this.mode_high) ? false : true;
-    this.mode_low = (this.mode_high) ? false: this.mode_low;
-    this.processOptions();
-}
-
-//toggle the mode_low option
-//setting low will unset high
-Deck.prototype.toggleLow = function () {
-    this.mode_low = (this.mode_low) ? false : true;
-    this.mode_high = (this.mode_low) ? false: this.mode_high;
+//toggle the mode_animations option
+Deck.prototype.toggleAnimation = function () {
+    this.mode_animations = (this.mode_animations) ? false : true;
     this.processOptions();
 }
 
