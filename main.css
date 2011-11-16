@@ -83,7 +83,7 @@ a:link, a:visited {
 
 #button-save {
     position:absolute;
-    bottom:-22px;
+    bottom:0px;
     right:39px;
     border:1px solid #bdbdbd;
     width:40px;
