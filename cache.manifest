@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 0.6.2
+# rev 0.6.3
 background.png
 buttons.png
 card.js
@@ -7,6 +7,7 @@ Chalkduster.ttf
 close.png
 controller.js
 deck.js
+deckmgr.js
 icon16.png
 icon48.png
 icon57.png

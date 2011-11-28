@@ -1,10 +1,11 @@
 /*
  * controller.js
  * Controls the state of the flashcard app using an instance of a Deck
+ * requires makeKey() function defined in cards.js
  */
 
 // Contoller globals
-var DECK;
+var DECKMGR;
 
 //check for proper html5 support
 if (!Modernizr.localstorage) {
@@ -100,14 +101,14 @@ function delNo() {
 }
 
 function delYes() {
-    DECK.deleteCard();
+    DECKMGR.active().deleteCard();
     updateDisplay();
     hide('conf');
 }
 
 //set form to edit the current card
 function edit() {
-  var card = DECK.current();
+  var card = DECKMGR.active().current();
   hotkeyDisable();
   resetDisplay();
   document.getElementById('phrase-1').value = card.phrase1;
@@ -119,7 +120,7 @@ function edit() {
 
 //display alternate phrase
 function flip() {
-    if (DECK.mode_animations) {
+    if (DECKMGR.mode_animations) {
         if (document.getElementById('main').style.display == 'none') {
             $('#main-alt').toggle("slide", { direction: "down" }, 300);
             setTimeout("$('#main').toggle('slide', {direction: 'up'}, 300)",300);      
@@ -134,7 +135,7 @@ function flip() {
 }
 
 function flipReset() {
-    if (DECK.mode_reverse) {
+    if (DECKMGR.mode_reverse) {
         document.getElementById('main').style.display = 'none';
         document.getElementById('main-alt').style.display = '';
     } else {
@@ -155,10 +156,10 @@ function hotkeyEnable() {
   document.onkeydown = checkHotkey;
 }
 
-function initDeck() {
-  DECK = new Deck('deck');
+function init() {
+  DECKMGR = new DeckMGR('deckmgr');
   //if deck is empty it could be first run or need to be migrated
-  if (DECK.length() <= 0) {
+  if (DECKMGR.length() <= 0) {
     migrationCheck();
   }
   updateDisplay();
@@ -170,22 +171,38 @@ function migrationCheck() {
     //prior to OO design
     var c = localStorage["cards"];
     if (c) {
+        var deck = new Deck('deck');
         var cards = JSON.parse(localStorage["cards"]);
         for (var ndx=0; ndx < cards.length; ndx++) {
             var oldCard = JSON.parse(localStorage[cards[ndx]]);
             var newCard = new Card({'phrase1':oldCard['1'], 'phrase2':oldCard['2'], 'points':oldCard['points']});
             newCard.save();
-            DECK.add(newCard);
+            deck.add(newCard);
             localStorage.removeItem(cards[ndx]);
         }
-        DECK.save();
+        deck.save();
         localStorage.removeItem("cards");
     }
     
     //migrate to DeckMGR >= 0.6.2
-    var deck = localStorage["deck"];
+    var deck = localStorage['deck'];
     if (deck) {
+        DECKMGR = new DeckMGR('deckmgr');
         
+        //copy deck to new format
+        var key = 'deck-'+makeKey();
+        localStorage[key] = deck;
+        
+        //set the name
+        var d = new Deck(key);
+        d.name = 'default';
+        d.save();
+        
+        //add to mgr and cleanup
+        DECKMGR.deck_add(key);
+        DECKMGR.deck_load(0);
+        DECKMGR.save();
+        localStorage.removeItem('deck');
     }
 }
 
@@ -214,8 +231,8 @@ function navHide() {
 
 //display next card
 function next() {
-    DECK.next();
-    if (DECK.mode_animations) {
+    DECKMGR.active().next();
+    if (DECKMGR.mode_animations) {
         $('#main').hide("slide", { direction: "left" }, 300);
     } else {
         hide('main');
@@ -251,14 +268,14 @@ function optionsClose() {
 
 //adjust point of card
 function pointDown() {
-    var card = DECK.current();
+    var card = DECKMGR.active().current();
     card.pointDown();
     card.save();
     next();
 }
 
 function pointUp() {
-    var card = DECK.current();
+    var card = DECKMGR.active().current();
     card.pointUp();
     card.save();
     next();
@@ -266,8 +283,8 @@ function pointUp() {
 
 //display previous card
 function prev() {
-    DECK.prev();
-    if (DECK.mode_animations) {
+    DECKMGR.active().prev();
+    if (DECKMGR.mode_animations) {
         $('#main').hide("slide", { direction: "right" }, 200);
     } else {
         hide('main');
@@ -328,8 +345,8 @@ function save() {
   } else {
     card = new Card({'phrase1':phrase1,'phrase2':phrase2});
     card.save();
-    DECK.add(card);
-    DECK.save();
+    DECKMGR.active().add(card);
+    DECKMGR.active().save();
     msg = 'Click options to add / edit / delete cards';
   }
   
@@ -354,7 +371,7 @@ function show(id) {
 
 //shuffles the deck
 function shuffle() {
-    DECK.shuffle();
+    DECKMGR.active().shuffle();
     updateDisplay();
 }
 
@@ -388,16 +405,16 @@ function toggleOption(elm) {
     //find option and do work
     switch(elm.id) {
       case 'lows':
-        DECK.toggleLow();
+        DECKMGR.active().toggleLow();
         break;
       case 'highs':
-        DECK.toggleHigh();
+        DECKMGR.active().toggleHigh();
         break;
       case 'option-animation':
-        DECK.toggleAnimation();
+        DECKMGR.toggleAnimation();
         break;
       case 'option-reverse':
-        DECK.toggleReverse();
+        DECKMGR.toggleReverse();
         break;
     }
   updateDisplay();
@@ -422,7 +439,7 @@ function updateDisplay(opts) {
     }
     flipReset();
     hide('conf');
-    var card = DECK.current();
+    var card = DECKMGR.active().current();
     if (!card) {
         // set help text for first run.
         //navHide();
@@ -441,18 +458,18 @@ function updateDisplay(opts) {
         //document.getElementById('meter').innerHTML = card.points;
         document.getElementById('key').value = card.key;
         
-        setStats((DECK.index+1) + ' / ' + DECK.length());
+        setStats((DECKMGR.active().index+1) + ' / ' + DECKMGR.active().length());
     }
     
-    if (DECK.mode_reverse) {
-        if (DECK.mode_animations) {
+    if (DECKMGR.mode_reverse) {
+        if (DECKMGR.mode_animations) {
             $('#main-alt').show("slide", { direction: opts['direction'] }, 200);
         } else {
             show('main-alt');
         }
         
     } else {
-        if (DECK.mode_animations) {
+        if (DECKMGR.mode_animations) {
             $('#main').show("slide", { direction: opts['direction'] }, 200);
         } else {
             show('main');
@@ -465,6 +482,6 @@ function updateDisplay(opts) {
 
 //update the state of the options to show current state
 function updateOptions() {
-    document.getElementById('option-animation').className = (DECK.mode_animations) ? 'on' : 'off';
-    document.getElementById('option-reverse').className = (DECK.mode_reverse) ? 'on' : 'off';
+    document.getElementById('option-animation').className = (DECKMGR.mode_animations) ? 'on' : 'off';
+    document.getElementById('option-reverse').className = (DECKMGR.mode_reverse) ? 'on' : 'off';
 }

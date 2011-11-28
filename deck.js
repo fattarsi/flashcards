@@ -15,6 +15,7 @@ function Deck(key) {
         d = {};
         d.mode_animations = true;
     }
+    this.name = (d.name) ? d.name : this.key;
     //this.index = (d.index) ? d.index : 0;
     this.index = 0;
     //master_set contains all cards in order that they were added
@@ -115,21 +116,5 @@ Deck.prototype.save = function () {
     localStorage[this.key] = JSON.stringify(this,null,2);
 }
 
-//toggle the mode_animations option
-Deck.prototype.toggleAnimation = function () {
-    this.mode_animations = (this.mode_animations) ? false : true;
-    this.processOptions();
-}
 
-//toggle the mode_random option
-Deck.prototype.toggleRandom = function () {
-    this.mode_random = (this.mode_random) ? false : true;
-    this.processOptions();
-}
-
-//toggle the mode_reverse option
-Deck.prototype.toggleReverse = function () {
-    this.mode_reverse = (this.mode_reverse) ? false : true;
-    this.processOptions();
-}
 
