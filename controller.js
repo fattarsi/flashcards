@@ -55,6 +55,37 @@ function checkHotkey(e) {
   }
 }
 
+//show conf screen for deleting a deck
+function deckDelete() {
+    alert('doto');
+}
+
+//show option form for current deck
+function deckRename() {
+    alert('todo');
+}
+
+//a deck was selected from the dropdown
+//do add operation if value='add' was passed
+//do nothing if value is blank or current deck is already selected
+function deckSelect(value) {
+    var current = 'default';
+    hide('deck-add');
+    switch(value) {
+        case '':
+        case current:
+            //do nothing
+            break;
+        case 'add':
+            //add operation
+            show('deck-add');
+            document.getElementById('deck-new-name').focus();
+            break;
+        default:
+            alert('switch to deck with key '+value);
+    }
+}
+
 function del() {
   document.getElementById('conf-msg').innerHTML = 'Are you sure you want to delete this card?';
   document.getElementById('conf-yes').onclick = delYes;
@@ -135,6 +166,8 @@ function initDeck() {
 
 //migrate a previous schema to current if needed
 function migrationCheck() {
+    
+    //prior to OO design
     var c = localStorage["cards"];
     if (c) {
         var cards = JSON.parse(localStorage["cards"]);
@@ -147,6 +180,12 @@ function migrationCheck() {
         }
         DECK.save();
         localStorage.removeItem("cards");
+    }
+    
+    //migrate to DeckMGR >= 0.6.2
+    var deck = localStorage["deck"];
+    if (deck) {
+        
     }
 }
 
@@ -204,8 +243,10 @@ function options() {
 
 function optionsClose() {
     cancel();
-    hide('modal-container');
+    hide('deck-add');
+    hide('option-container');
     hide('phrase-form');
+    hide('modal-container');
 }
 
 //adjust point of card
@@ -264,6 +305,7 @@ function resetNo() {
   hide('conf');
 }
 
+// save card form
 function save() {
   var phrase1 = document.getElementById('phrase-1').value;
   var phrase2 = document.getElementById('phrase-2').value;
@@ -299,6 +341,11 @@ function save() {
   document.getElementById('button-add-another').focus();
   hotkeyEnable();
   setTimeout("msgClose()", 5000);
+}
+
+//save deck
+function saveDeck() {
+    alert('todo!');
 }
 
 function show(id) {
@@ -346,10 +393,10 @@ function toggleOption(elm) {
       case 'highs':
         DECK.toggleHigh();
         break;
-      case 'option-animation-box':
+      case 'option-animation':
         DECK.toggleAnimation();
         break;
-      case 'option-reverse-box':
+      case 'option-reverse':
         DECK.toggleReverse();
         break;
     }
@@ -418,6 +465,6 @@ function updateDisplay(opts) {
 
 //update the state of the options to show current state
 function updateOptions() {
-    document.getElementById('option-animation-box').checked = DECK.mode_animations;
-    document.getElementById('option-reverse-box').checked = DECK.mode_reverse;
+    document.getElementById('option-animation').className = (DECK.mode_animations) ? 'on' : 'off';
+    document.getElementById('option-reverse').className = (DECK.mode_reverse) ? 'on' : 'off';
 }

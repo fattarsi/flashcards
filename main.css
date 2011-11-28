@@ -51,6 +51,14 @@ a:link, a:visited {
     left:1px;
 }
 
+#button-deck-save {
+    position:absolute;
+    top:38px;
+    right:18px;
+    width:40px;
+    border:1px solid #bdbdbd;
+}
+
 #button-delete {
     position:absolute;
     top:-26px;
@@ -159,6 +167,37 @@ a:link, a:visited {
     font-size:9px;
     color:#ccc;
 }
+
+#deck-add {
+    position:absolute;
+    top:25px;
+    left:6px;
+}
+
+#deck-choices {
+    position:absolute;
+    top:55px;
+    left:0px;
+    width:95%;
+}
+
+#deck-current {
+    position:absolute;
+    top:17px;
+    left:21px;
+    font-style:italic;
+}
+
+#deck-current-options {
+    position:absolute;
+    top:17px;
+    left:63px;
+}
+
+    #deck-current-options div.button {
+        border:1px solid #bdbdbd;
+        padding:0px 6px;
+    }
 
 #main {
     width:100%;
@@ -269,15 +308,64 @@ a:link, a:visited {
 
 #option-container {
     position:absolute;
-    top:122px;
-    left:139px;
+    top:26px;
+    left:1px;
+    width:448px;
+    height:234px;
     background:#fff;
 }
 
     #option-container div{
-        cursor:pointer;
         float:left;
         margin:0px 8px;
+    }
+
+#option-container-left {
+    position:absolute;
+    top:1px;
+    left:1px;
+    width:224px;
+    height:100%;
+}
+
+#option-container-right {
+    position:absolute;
+    top:1px;
+    left:224px;
+    width:224px;
+    height:100%;
+    border-left:1px dashed #efefef;
+}
+
+#option-crud {
+    position:absolute;
+    top:21px;
+    left:19px;
+}
+
+    #option-crud {
+        cursor:pointer;
+    }
+
+#option-buttons {
+    position:absolute;
+    bottom:58px;
+    left:36px;
+}
+
+    #option-buttons div {
+        cursor:pointer;
+        width:100px;
+        padding:5px 0px;
+        text-align:center;
+        margin-bottom:20px;
+        border:2px outset #efefef;
+    }
+    
+    #option-buttons div.on {
+        border:2px inset #efefef;
+        background:#eee;
+        color:#999;
     }
 
 #option-add {
@@ -298,17 +386,17 @@ a:link, a:visited {
     background:url('buttons.png') -88px -52px;  
 }
 
-#option-animation {
+/*#option-animation {
     position:absolute;
-    bottom:-115px;
-    left:-143px;
+    bottom:0px;
+    left:0px;
 }
 
 #option-reverse {
     position:absolute;
-    bottom:-115px;
-    right:-161px;
-}
+    bottom:0px;
+    right:0px;
+}*/
 
 #phrase-form {
     position:absolute;

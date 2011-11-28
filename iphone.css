@@ -38,7 +38,7 @@ body[orient="portrait"] #container {
     width:295px;
     height:290px;
     border:1px outset;
-    background:url('background.png') repeat-x;
+    background:#fff url('background.png') repeat-x;
 }
 
 body[orient="portrait"] #main-container {
