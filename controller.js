@@ -383,7 +383,6 @@ function save() {
   var phrase2 = document.getElementById('phrase-2').value;
   
   if (!phrase1 || !phrase2) {
-    setMsg('Both fields are required');
     return;
   }
   
@@ -402,10 +401,8 @@ function save() {
     card.save();
     DECKMGR.active().add(card);
     DECKMGR.active().save();
-    msg = 'Click options to add / edit / delete cards';
   }
   
-  setMsg(msg);
   cancel();
   updateDisplay();
   resetDisplay();
@@ -538,6 +535,7 @@ function updateDisplay(opts) {
         show('card-container');
     } else {
         //navShow();
+        hide('msg-container');
         optionShow();
         document.getElementById('main').innerHTML = card.phrase1;
         document.getElementById('main-alt').innerHTML = card.phrase2;
