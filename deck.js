@@ -13,7 +13,6 @@ function Deck(key) {
         d = JSON.parse(localStorage[key]);
     } else {
         d = {};
-        d.mode_animations = true;
     }
     this.name = (d.name) ? d.name : this.key;
     //this.index = (d.index) ? d.index : 0;
@@ -21,14 +20,9 @@ function Deck(key) {
     //master_set contains all cards in order that they were added
     //this might get deprecated, might just use a single list
     this.master_set = (d.master_set) ? d.master_set : new Array();
-    //this.cards = (d.cards) ? d.cards : new Array();
-    //cards is the current ordering based on mutation options (random, low/high)
+    //cards is the current ordering based on mutation options, like shuffle
     this.cards = this.master_set.slice();
-    this.mode_animations = (d.mode_animations) ? d.mode_animations : false;
-    this.mode_random = (d.mode_random) ? d.mode_random : false;
-    this.mode_reverse = (d.mode_reverse) ? d.mode_reverse : false;
-    
-    this.processOptions();
+
 }
 
 //add card to back of deck
@@ -99,11 +93,6 @@ Deck.prototype.prev = function () {
     if (this.index < 0) {
       this.index = this.length() - 1;
     }
-}
-
-//set the cards array based on mode_* options
-Deck.prototype.processOptions = function () {
-    this.save();
 }
 
 //mixes up order of cards

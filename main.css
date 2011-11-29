@@ -19,6 +19,10 @@ input {
     margin:5px 0px;
 }
 
+select {
+    border:1px solid #ccc;
+}
+
 @font-face {
     font-family: "chalkduster";
     src: url(Chalkduster.ttf) format("truetype");
@@ -49,14 +53,6 @@ a:link, a:visited {
     position:absolute;
     top:-26px;
     left:1px;
-}
-
-#button-deck-save {
-    position:absolute;
-    top:38px;
-    right:18px;
-    width:40px;
-    border:1px solid #bdbdbd;
 }
 
 #button-delete {
@@ -174,30 +170,49 @@ a:link, a:visited {
     left:6px;
 }
 
+#deck-container {
+    position:absolute;
+    top:72px;
+    left:16px;
+    width:200px;
+    height:160px;
+}
+
+    #deck-container .button {
+        margin-right:18px;
+    }
+
 #deck-choices {
     position:absolute;
-    top:55px;
-    left:0px;
+    top:-2px;
+    left:40px;
     width:95%;
 }
 
-#deck-current {
+#deck-form {
     position:absolute;
-    top:17px;
-    left:21px;
-    font-style:italic;
+    top:0px;
+    left:40px;
 }
 
-#deck-current-options {
-    position:absolute;
-    top:17px;
-    left:63px;
-}
-
-    #deck-current-options div.button {
-        border:1px solid #bdbdbd;
-        padding:0px 6px;
+    #deck-form input {
+        height:14px;
+        background:#fff;
+        margin:0px;
+        border:1px dashed #ccc;
     }
+
+#deck-form-options {
+    position:absolute;
+    top:32px;
+    left:0px;    
+}
+
+#deck-options {
+    position:absolute;
+    top:32px;
+    left:0px;
+}
 
 #main {
     width:100%;
@@ -249,6 +264,11 @@ a:link, a:visited {
     font-size:14px;
     color:#bdbdbd;
 }
+
+    #modal-container div.button {
+        border:1px solid #bdbdbd;
+        padding:0px 5px;
+    }
 
 #modal-container-close {
     position:absolute;
@@ -317,7 +337,6 @@ a:link, a:visited {
 
     #option-container div{
         float:left;
-        margin:0px 8px;
     }
 
 #option-container-left {
@@ -340,17 +359,18 @@ a:link, a:visited {
 #option-crud {
     position:absolute;
     top:21px;
-    left:19px;
+    left:50px;
 }
 
-    #option-crud {
+    #option-crud div {
         cursor:pointer;
+        float:left;
     }
 
 #option-buttons {
     position:absolute;
     bottom:58px;
-    left:36px;
+    left:52px;
 }
 
     #option-buttons div {

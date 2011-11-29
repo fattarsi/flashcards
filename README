@@ -1,4 +1,4 @@
-Flashcards v0.6.3
+Flashcards v0.6.4
 
 A simple HTML5 app that features:
  * Add / Edit / Delete flashcards through the frontend
@@ -13,6 +13,7 @@ A simple HTML5 app that features:
 Try it out at: http://fattarsi.com/flashcards/
 
 Recent development changes:
+ * Ability to manage multiple decks for different subjects
  * Reverse mode added in options menu
  * Option to disable animations
  * Simplified interface

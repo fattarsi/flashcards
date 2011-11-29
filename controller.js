@@ -56,14 +56,43 @@ function checkHotkey(e) {
   }
 }
 
+//return a html option node
+function createOptionNode(value, text, is_selected) {
+    var opt = document.createElement('option');
+    opt.setAttribute('value', value);
+    if (is_selected) {
+        opt.setAttribute('selected', 'selected');
+    }
+    opt.appendChild(document.createTextNode(text));
+    return opt;
+}
+
 //show conf screen for deleting a deck
 function deckDelete() {
     alert('doto');
 }
 
+//generate drop down list for decks
+function deckListCreate() {
+    var elm = document.getElementById('deck-list');
+    //clear previous entries
+    elm.innerHTML = '';
+    //static entries
+    elm.appendChild(createOptionNode('add', 'Add new'));
+    elm.appendChild(createOptionNode('', '----------------'));
+    
+    //dynamic entries
+    for (var i=0 ; i<DECKMGR.length() ; i++) {
+        var d = DECKMGR.deck_at_index(i);
+        elm.appendChild(createOptionNode(i, d.name, (d.key == DECKMGR.active().key)));
+    }
+}
+
 //show option form for current deck
 function deckRename() {
-    alert('todo');
+    hide('deck-choices');
+    show('deck-form');
+    document.getElementById('deck-form-value').focus();
 }
 
 //a deck was selected from the dropdown
@@ -71,7 +100,7 @@ function deckRename() {
 //do nothing if value is blank or current deck is already selected
 function deckSelect(value) {
     var current = 'default';
-    hide('deck-add');
+    hide('deck-form');
     switch(value) {
         case '':
         case current:
@@ -79,11 +108,14 @@ function deckSelect(value) {
             break;
         case 'add':
             //add operation
-            show('deck-add');
-            document.getElementById('deck-new-name').focus();
+            document.getElementById('deck-key').value = '';
+            document.getElementById('deck-form-value').value = '';
+            hide('deck-choices');
+            show('deck-form');
+            document.getElementById('deck-form-value').focus();
             break;
         default:
-            alert('switch to deck with key '+value);
+            DECKMGR.deck_load(value);
     }
 }
 
@@ -250,9 +282,11 @@ function optionHide() {
 function optionShow() {
     show('option-del');
     show('option-edit');
+    show('deck-choices');
 }
 
 function options() {
+    deckListCreate();
     show('modal-container');
     show('option-container');
     hide('phrase-form');
@@ -260,7 +294,7 @@ function options() {
 
 function optionsClose() {
     cancel();
-    hide('deck-add');
+    hide('deck-form');
     hide('option-container');
     hide('phrase-form');
     hide('modal-container');
@@ -362,7 +396,35 @@ function save() {
 
 //save deck
 function saveDeck() {
-    alert('todo!');
+    var name = document.getElementById('deck-form-value').value;
+    if (!name) {
+        return;
+    }
+    
+    var index = document.getElementById('deck-key').value;
+    
+    var d;
+    if (index) {
+        //edit
+        d = DECKMGR.deck_at_index(index);
+        d.name = name;
+        d.save();
+    } else {
+        //add new
+        var ndx = DECKMGR.createDeck(name);
+        //load new deck
+        DECKMGR.deck_load(ndx);
+    }
+    
+    //update list
+    deckListCreate();
+    saveDeckCancel();
+}
+
+//cancel save operation, redo display
+function saveDeckCancel() {
+    show('deck-choices');
+    hide('deck-form');
 }
 
 function show(id) {
@@ -482,6 +544,8 @@ function updateDisplay(opts) {
 
 //update the state of the options to show current state
 function updateOptions() {
+    document.getElementById('deck-key').value = DECKMGR.index;
+    document.getElementById('deck-form-value').value = DECKMGR.active().name;
     document.getElementById('option-animation').className = (DECKMGR.mode_animations) ? 'on' : 'off';
     document.getElementById('option-reverse').className = (DECKMGR.mode_reverse) ? 'on' : 'off';
 }

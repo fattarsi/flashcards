@@ -36,14 +36,35 @@ DeckMGR.prototype.active = function () {
     return this.current_deck;
 }
 
+//create a new deck to manage with name
+//return index where it was added
+DeckMGR.prototype.createDeck = function (name) {
+    var key = 'deck-'+makeKey();
+    var d = new Deck(key);
+    d.name = name;
+    d.save()
+    this.deck_add(key);
+    this.save();
+    return this.decks.indexOf(key);
+}
+
 //add deck key to mgr
 DeckMGR.prototype.deck_add = function (key) {
     this.decks.push(key)
 }
 
+//return deck object at given index
+DeckMGR.prototype.deck_at_index = function (index) {
+    if (index < 0 || index >= this.length()) {
+        //index out of range, do nothing
+        return null;
+    }
+    return new Deck(this.decks[index]);
+}
+
 //set active deck to deck at index
 DeckMGR.prototype.deck_load = function (index) {
-    if (index > 0 || index >= this.length()) {
+    if (index < 0 || index >= this.length()) {
         //index out of range, do nothing
         return;
     }

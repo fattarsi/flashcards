@@ -27,32 +27,33 @@
                 <span id="modal-container-close" class="button" onclick="optionsClose()"></span>
                 <div id="option-container" style="display:none">
                     <div id="option-container-left">
-                        <div id="deck-current-container">
+                        <div id="deck-container">
                             <div>Deck</div>
-                            <div id="deck-current">default</div>
-                            <div id="deck-current-options">
-                                <div id="deck-rename" class="button" onclick="deckRename()">rename</div>
-                                <div id="deck-delete" class="button" onclick="deckDelete()">delete</div>
-                            </div>
-                        </div>
-                        
-                        <div id="deck-choices">
-                            <select onchange="deckSelect(this.options[this.selectedIndex].value)">
-                                <option value="add">Add new</option>
-                                <option value="">-----------------</option>
-                                <option value="default" selected="selected">default</option>
-                                <option value="key1">Spanish</option>
-                                <option value="key2">AP Psychology</option>
-                            </select>
+                            <div id="deck-choices">
+                                <select id="deck-list" onchange="deckSelect(this.options[this.selectedIndex].value)">
+                                </select>
+                                
+                                <div id="deck-options">
+                                    <div class="button" onclick="deckRename()">rename</div>
+                                    <div class="button" onclick="deckDelete()">delete</div>
+                                </div>
+                            </div><!-- deck-choices -->
                             
-                            <div id="deck-add" style="display:none">
-                                <label for="deck-new-name">name:</label>
-                                <input id="deck-new-name" type="text" maxlength="16" />
-                                <button type="submit" style="visibility:hidden" onclick="saveDeck()">save</button>
-                                <div id="button-deck-save" class="button" onclick="saveDeck()">save</div>
+                            
+                            
+                            <div id="deck-form" style="display:none">
+                                <form action="" onsubmit="return false;">
+                                    <input id="deck-key" type="hidden" value="" />
+                                    <input id="deck-form-value" type="text" maxlength="16" value="" />
+                                    <button type="submit" style="visibility:hidden" onclick="saveDeck()">save</button>
+                                    <div id="deck-form-options">
+                                        <div class="button" onclick="saveDeck()">save</div>
+                                        <div class="button" onclick="saveDeckCancel()">cancel</div>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
-                    </div>
+                        </div><!-- deck-container -->
+                    </div><!-- option-container-left -->
                     
                     <div id="option-container-right">
                         <div id="option-crud">
@@ -114,7 +115,7 @@
             </div>
             
             <span id="credits"><a href="http://chrisfattarsi.com/flashcards">chris fattarsi</a></span>
-            <span id="version">0.6.3</span>
+            <span id="version">0.6.4</span>
         </div>
         
         <script src="js/modernizr.js" type="text/javascript" charset="utf-8"></script>
