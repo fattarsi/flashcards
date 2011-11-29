@@ -61,9 +61,12 @@
                     
                     <div id="option-container-right">
                         <div id="option-crud">
-                            <div id="option-edit" onclick="edit()"></div>
-                            <div id="option-add" onclick="add()"></div>
-                            <div id="option-del" onclick="del()"></div>
+                            <div>Card options</div>
+                            <div id="card-options">
+                                <div id="option-add" class="button" onclick="add()">add</div>
+                                <div id="option-edit" class="button" onclick="edit()">edit</div>
+                                <div id="option-del" class="button" onclick="del()">delete</div>
+                            </div>
                         </div>
                         
                         <div id="option-buttons">
@@ -119,7 +122,7 @@
             </div>
             
             <span id="credits"><a href="http://chrisfattarsi.com/flashcards">chris fattarsi</a></span>
-            <span id="version">0.6.6</span>
+            <span id="version">0.6.7</span>
         </div>
         
         <script src="js/modernizr.js" type="text/javascript" charset="utf-8"></script>

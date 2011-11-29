@@ -306,6 +306,7 @@ function optionShow() {
 }
 
 function options() {
+    hotkeyDisable();
     hide('phrase-form');
     hide('deck-delete-conf');
     deckListCreate();
@@ -314,6 +315,7 @@ function options() {
 }
 
 function optionsClose() {
+    hotkeyEnable();
     cancel();
     hide('deck-form');
     hide('option-container');

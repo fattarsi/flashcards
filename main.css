@@ -140,6 +140,14 @@ a:link, a:visited {
     font-family:'chalkduster', sans-serif;
 }
 
+#card-options {
+    position:absolute;
+    top:21px;
+    left:9px;
+    width:141px;
+    height:21px;
+}
+
 #conf {
     position:absolute;
     top:54px;
@@ -359,12 +367,13 @@ a:link, a:visited {
 #option-crud {
     position:absolute;
     top:21px;
-    left:50px;
+    left:36px;
 }
 
     #option-crud div {
         cursor:pointer;
         float:left;
+        margin-right:10px;
     }
 
 #option-buttons {
@@ -387,24 +396,6 @@ a:link, a:visited {
         background:#eee;
         color:#999;
     }
-
-#option-add {
-    width:36px;
-    height:36px;
-    background:url('buttons.png') -127px -54px;
-}
-
-#option-del {
-    width:36px;
-    height:36px;
-    background:url('buttons.png') -168px -54px;
-}
-
-#option-edit {
-    width:36px;
-    height:36px;
-    background:url('buttons.png') -88px -52px;  
-}
 
 /*#option-animation {
     position:absolute;
