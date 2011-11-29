@@ -140,7 +140,7 @@ function delDeckYes() {
         init();
     }
     saveDeckCancel();
-    options();
+    updateDisplay();
 }
 
 function delNo() {
