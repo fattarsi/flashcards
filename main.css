@@ -144,7 +144,7 @@ a:link, a:visited {
     position:absolute;
     top:21px;
     left:9px;
-    width:141px;
+    width:151px;
     height:21px;
 }
 
@@ -380,6 +380,8 @@ a:link, a:visited {
     position:absolute;
     bottom:58px;
     left:52px;
+    width:115px;
+    height:100px;
 }
 
     #option-buttons div {
