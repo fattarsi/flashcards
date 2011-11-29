@@ -39,7 +39,11 @@
                                 </div>
                             </div><!-- deck-choices -->
                             
-                            
+                            <div id="deck-delete-conf" style="display:none">
+                                <div>Are you sure you want to delete the deck "<span id="deck-delete-name"></span>" which has <span id="deck-delete-count"></span> cards?</div>
+                                <div class="button" onclick="delDeckYes()">yes</div>
+                                <div class="button" onclick="saveDeckCancel()">no</div>
+                            </div>
                             
                             <div id="deck-form" style="display:none">
                                 <form action="" onsubmit="return false;">
@@ -115,7 +119,7 @@
             </div>
             
             <span id="credits"><a href="http://chrisfattarsi.com/flashcards">chris fattarsi</a></span>
-            <span id="version">0.6.4</span>
+            <span id="version">0.6.5</span>
         </div>
         
         <script src="js/modernizr.js" type="text/javascript" charset="utf-8"></script>

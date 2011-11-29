@@ -53,6 +53,16 @@ DeckMGR.prototype.deck_add = function (key) {
     this.decks.push(key)
 }
 
+//delete active deck and and cards in it
+DeckMGR.prototype.deck_delete = function () {
+    this.active().deleteAllCards();
+    //rm deck
+    localStorage.removeItem(this.active().key);
+    this.decks.splice(this.index,1);
+    this.deck_load(0);
+    this.save();
+}
+
 //return deck object at given index
 DeckMGR.prototype.deck_at_index = function (index) {
     if (index < 0 || index >= this.length()) {
@@ -68,7 +78,9 @@ DeckMGR.prototype.deck_load = function (index) {
         //index out of range, do nothing
         return;
     }
+    this.index = index;
     this.current_deck = new Deck(this.decks[index]);
+    this.save();
     
 }
 

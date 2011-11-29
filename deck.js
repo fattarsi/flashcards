@@ -54,6 +54,16 @@ Deck.prototype.currentKey = function () {
     return this.cards[this.index];
 }
 
+//delete all cards in deck
+Deck.prototype.deleteAllCards = function () {
+    while(this.length() > 0) {
+        this.deleteCard();
+        this.next();
+    }
+    
+    this.save();
+}
+
 //delete the current card
 Deck.prototype.deleteCard = function () {
     if (this.length() <= 0) {

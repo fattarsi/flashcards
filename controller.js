@@ -69,7 +69,10 @@ function createOptionNode(value, text, is_selected) {
 
 //show conf screen for deleting a deck
 function deckDelete() {
-    alert('doto');
+    hide('deck-choices');
+    document.getElementById('deck-delete-name').innerHTML = DECKMGR.active().name;
+    document.getElementById('deck-delete-count').innerHTML = DECKMGR.active().length();
+    show('deck-delete-conf');
 }
 
 //generate drop down list for decks
@@ -105,6 +108,7 @@ function deckSelect(value) {
         case '':
         case current:
             //do nothing
+            return;
             break;
         case 'add':
             //add operation
@@ -116,6 +120,7 @@ function deckSelect(value) {
             break;
         default:
             DECKMGR.deck_load(value);
+            updateDisplay();
     }
 }
 
@@ -126,6 +131,16 @@ function del() {
   hide('msg-container');
   optionsClose();
   show('conf');
+}
+
+//delete active deck and all cards
+function delDeckYes() {
+    DECKMGR.deck_delete();
+    if (DECKMGR.length() <= 0) {
+        init();
+    }
+    saveDeckCancel();
+    options();
 }
 
 function delNo() {
@@ -190,9 +205,14 @@ function hotkeyEnable() {
 
 function init() {
   DECKMGR = new DeckMGR('deckmgr');
-  //if deck is empty it could be first run or need to be migrated
+  //if deckmgr is empty it could be first run or need to be migrated
   if (DECKMGR.length() <= 0) {
     migrationCheck();
+    //if still empty, add a default deck
+    if (DECKMGR.length() <= 0) {
+        var ndx = DECKMGR.createDeck('default');
+        DECKMGR.deck_load(ndx);
+    }
   }
   updateDisplay();
 }
@@ -286,10 +306,11 @@ function optionShow() {
 }
 
 function options() {
+    hide('phrase-form');
+    hide('deck-delete-conf');
     deckListCreate();
     show('modal-container');
     show('option-container');
-    hide('phrase-form');
 }
 
 function optionsClose() {
@@ -411,13 +432,14 @@ function saveDeck() {
         d.save();
     } else {
         //add new
-        var ndx = DECKMGR.createDeck(name);
-        //load new deck
-        DECKMGR.deck_load(ndx);
+        index = DECKMGR.createDeck(name);
     }
     
+    //must load to update deckmgr instance
+    DECKMGR.deck_load(index);
+    
     //update list
-    deckListCreate();
+    updateDisplay();
     saveDeckCancel();
 }
 
@@ -425,6 +447,7 @@ function saveDeck() {
 function saveDeckCancel() {
     show('deck-choices');
     hide('deck-form');
+    hide('deck-delete-conf');
 }
 
 function show(id) {
@@ -506,11 +529,12 @@ function updateDisplay(opts) {
         // set help text for first run.
         //navHide();
         //hide edit/del options when there are 0 cards
-        setMsg('click here to add your first card', function () {add();});
+        setMsg('no cards in this deck, click here to add', function () {add();});
         optionHide();
         document.getElementById('main').innerHTML = 'Click here to toggle';
         document.getElementById('main-alt').innerHTML = 'Now add some';
         //document.getElementById('button-add').focus();
+        setStats('0 cards');
         show('card-container');
     } else {
         //navShow();
@@ -544,6 +568,7 @@ function updateDisplay(opts) {
 
 //update the state of the options to show current state
 function updateOptions() {
+    deckListCreate();
     document.getElementById('deck-key').value = DECKMGR.index;
     document.getElementById('deck-form-value').value = DECKMGR.active().name;
     document.getElementById('option-animation').className = (DECKMGR.mode_animations) ? 'on' : 'off';
