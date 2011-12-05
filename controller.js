@@ -168,6 +168,7 @@ function edit() {
 //display alternate phrase
 function flip() {
     if (DECKMGR.mode_animations) {
+        hotkeyDisable()
         if (document.getElementById('main').style.display == 'none') {
             $('#main-alt').toggle("slide", { direction: "down" }, 300);
             setTimeout("$('#main').toggle('slide', {direction: 'up'}, 300)",300);      
@@ -175,6 +176,7 @@ function flip() {
             $('#main').toggle("slide", { direction: "up" }, 300);
             setTimeout("$('#main-alt').toggle('slide', {direction: 'down'}, 300)",300);
         }
+        setTimeout('hotkeyEnable()', 300);
     } else {
         toggle('main');
         toggle('main-alt');
@@ -215,6 +217,11 @@ function init() {
     }
   }
   updateDisplay();
+}
+
+//return false if id is display:none
+function isVisible(id) {
+    return document.getElementById(id).style.display != 'none';
 }
 
 //migrate a previous schema to current if needed
@@ -283,9 +290,14 @@ function navHide() {
 
 //display next card
 function next() {
+    hotkeyDisable();
     DECKMGR.active().next();
     if (DECKMGR.mode_animations) {
-        $('#main').hide("slide", { direction: "left" }, 300, function () {updateDisplay()});
+        if (isVisible('main')) {
+            $('#main').hide("slide", { direction: "left" }, 300, function () {updateDisplay()});
+        } else {
+            $('#main-alt').hide("slide", { direction: "left" }, 300, function () {updateDisplay()});
+        }
     } else {
         hide('main');
         updateDisplay();
@@ -341,9 +353,14 @@ function pointUp() {
 
 //display previous card
 function prev() {
+    hotkeyDisable();
     DECKMGR.active().prev();
     if (DECKMGR.mode_animations) {
-        $('#main').hide("slide", { direction: "right" }, 200, function () {updateDisplay({'direction':'left'})});
+        if (isVisible('main')) {
+            $('#main').hide("slide", { direction: "right" }, 200, function () {updateDisplay({'direction':'left'})});
+        } else {
+            $('#main-alt').hide("slide", { direction: "right" }, 200, function () {updateDisplay({'direction':'left'})});
+        }
     } else {
         hide('main');
         updateDisplay({'direction':'left'});
@@ -563,7 +580,7 @@ function updateDisplay(opts) {
     }
     
     updateOptions();
-    
+    hotkeyEnable();
 }
 
 //update the state of the options to show current state
