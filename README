@@ -1,4 +1,4 @@
-Flashcards v0.6.8
+Flashcards v0.7
 
 A simple HTML5 app that features:
  * Add / Edit / Delete flashcards through the frontend
@@ -10,7 +10,8 @@ A simple HTML5 app that features:
  * Randomize feature to study cards in a different order
  * Study cards back-to-front or front-to-back
 
-Try it out at: http://fattarsi.com/flashcards/
+Download at the Chrome store or
+at http://fattarsi.com/flashcards/
 
 Recent development changes:
  * Ability to manage multiple decks for different subjects
