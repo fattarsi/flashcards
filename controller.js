@@ -87,7 +87,7 @@ function deckListCreate() {
     //dynamic entries
     for (var i=0 ; i<DECKMGR.length() ; i++) {
         var d = DECKMGR.deck_at_index(i);
-        elm.appendChild(createOptionNode(i, d.name, (d.key == DECKMGR.active().key)));
+        elm.appendChild(createOptionNode(i, d.name+' ('+d.length()+')', (d.key == DECKMGR.active().key)));
     }
 }
 
@@ -285,11 +285,12 @@ function navHide() {
 function next() {
     DECKMGR.active().next();
     if (DECKMGR.mode_animations) {
-        $('#main').hide("slide", { direction: "left" }, 300);
+        $('#main').hide("slide", { direction: "left" }, 300, function () {updateDisplay()});
     } else {
         hide('main');
+        updateDisplay();
     }
-    updateDisplay();
+    //updateDisplay();
 }
 
 //hide edit/del options
@@ -342,12 +343,11 @@ function pointUp() {
 function prev() {
     DECKMGR.active().prev();
     if (DECKMGR.mode_animations) {
-        $('#main').hide("slide", { direction: "right" }, 200);
+        $('#main').hide("slide", { direction: "right" }, 200, function () {updateDisplay({'direction':'left'})});
     } else {
         hide('main');
+        updateDisplay({'direction':'left'});
     }
-    
-    updateDisplay({'direction':'left'});
 }
 
 function reset() {
@@ -571,6 +571,6 @@ function updateOptions() {
     deckListCreate();
     document.getElementById('deck-key').value = DECKMGR.index;
     document.getElementById('deck-form-value').value = DECKMGR.active().name;
-    document.getElementById('option-animation').className = (DECKMGR.mode_animations) ? 'on' : 'off';
-    document.getElementById('option-reverse').className = (DECKMGR.mode_reverse) ? 'on' : 'off';
+    document.getElementById('option-animation').className = (DECKMGR.mode_animations) ? 'switch-on' : 'switch-off';
+    document.getElementById('option-reverse').className = (DECKMGR.mode_reverse) ? 'switch-on' : 'switch-off';
 }

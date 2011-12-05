@@ -1,6 +1,6 @@
 /*
  * deckmgr.js
- * Defines a Deck Manager class to manage 1 or more decks of flashcards. The deckmgr holds references to decks
+ * Defines a Deck Manager class to manage decks of flashcards. The deckmgr holds references to decks
  * and holds the viewing preferences
  */
 
@@ -20,15 +20,14 @@ function DeckMGR(key) {
     
     //index of active deck in decks array
     this.index = (d.index) ? d.index : 0;
-    
-    this.current_deck = undefined;
-    //set current deck
-    this.deck_load(this.index);
 
     //view option settings
-    this.mode_animations = (d.mode_animations) ? d.mode_animations : false;
-    this.mode_reverse = (d.mode_reverse) ? d.mode_reverse : false;
-
+    this.mode_animations = (d.mode_animations) ? true : false;
+    this.mode_reverse = (d.mode_reverse) ? true : false;
+    
+    this.current_deck = undefined;
+    //set current deck, must be done last since it saves at end
+    this.deck_load(this.index);
 }
 
 //return the active deck as a deck object
