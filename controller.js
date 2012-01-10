@@ -12,6 +12,11 @@ if (!Modernizr.localstorage) {
   setMsg('Your browser does not support cool features of HTML5 like localstorage, therefore cannot use this app.');
 }
 
+// only get URL when necessary in case BlobBuilder.js hasn't defined it yet
+get_blob_builder = function() {
+    return document.BlobBuilder || document.WebKitBlobBuilder || document.MozBlobBuilder;
+}
+
 //show add form
 function add() {
   hide('option-container');
@@ -65,20 +70,6 @@ function createOptionNode(value, text, is_selected) {
     }
     opt.appendChild(document.createTextNode(text));
     return opt;
-}
-
-function export_csv() {
-    var d = window.open('', 'export '+DECKMGR.active().name);
-    d.document.open('text/csv');
-    d.document.write('<html><textarea style="margin-top: 2px; margin-bottom: 2px; height: 287px; margin-left: 2px; margin-right: 2px; width: 462px; ">');
-    for (var i=0 ; i<DECKMGR.active().length() ; i++) {
-        var c = DECKMGR.active().current();
-        d.document.write('"'+escape(c.phrase1)+'","'+escape(c.phrase2)+'"\n');
-        DECKMGR.active().next();
-    }
-    d.document.write('</textarea></html>');
-    d.document.close();
-    return true;
 }
 
 //show conf screen for deleting a deck
@@ -179,17 +170,37 @@ function edit() {
   document.getElementById('phrase-1').focus();
 }
 
-//display the Import / Export container, hiding other option windows
-function exim() {
-  hide('option-container');
-  document.getElementById('modal-container-close').onclick = eximClose;
-  show('exim-container');
+function export_csv() {
+    var d = window.open('', 'export '+DECKMGR.active().name);
+    d.document.open('text/csv');
+    d.document.write('<html><textarea style="margin-top: 2px; margin-bottom: 2px; height: 287px; margin-left: 2px; margin-right: 2px; width: 462px; ">');
+    for (var i=0 ; i<DECKMGR.active().length() ; i++) {
+        var c = DECKMGR.active().current();
+        d.document.write('"'+escape(c.phrase1)+'","'+escape(c.phrase2)+'"\n');
+        DECKMGR.active().next();
+    }
+    d.document.write('</textarea></html>');
+    d.document.close();
+    return true;
 }
 
-function eximClose() {
-  hide('exim-container');
-  show('option-container');
-  document.getElementById('modal-container-close').onclick = optionsClose;
+//generate and prompt browser to download a .csv of
+//current deck of cards
+function eximExport() {
+    var bb = new BlobBuilder;
+    bb.append("Hello, world!");
+    saveAs(bb.getBlob("text/plain;charset=utf-8"), "hello world.txt");
+}
+
+function eximImport() {
+    hide('exim-button-container');
+    show('exim-import-container');
+}
+
+// cancel file import
+function eximImportCancel() {
+    hide('exim-import-container');
+    show('exim-button-container');
 }
 
 //display alternate phrase
