@@ -25,9 +25,19 @@
             </div><!-- main-container -->        
             <div id="modal-container" style="display:none">
                 <span id="modal-container-close" class="button" onclick="optionsClose()"></span>
+                <div id="exim-container" style="display:none">
+                    <div id="exim-container-left">
+                      <div id="button-import" class="button">Import</div>
+                    </div>
+                    <div id="exim-container-right">
+                      <div id="button-export" class="button">Export</div>
+                    </div>
+                </div>
                 <div id="option-container" style="display:none">
                     <div id="option-container-left">
+
                         <div id="deck-container">
+                            <div id="button-exim" class="button" onclick="exim()">Import / Export</div>
                             <div>Deck</div>
                             <div id="deck-choices">
                                 <select id="deck-list" onchange="deckSelect(this.options[this.selectedIndex].value)">

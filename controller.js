@@ -67,6 +67,20 @@ function createOptionNode(value, text, is_selected) {
     return opt;
 }
 
+function export_csv() {
+    var d = window.open('', 'export '+DECKMGR.active().name);
+    d.document.open('text/csv');
+    d.document.write('<html><textarea style="margin-top: 2px; margin-bottom: 2px; height: 287px; margin-left: 2px; margin-right: 2px; width: 462px; ">');
+    for (var i=0 ; i<DECKMGR.active().length() ; i++) {
+        var c = DECKMGR.active().current();
+        d.document.write('"'+escape(c.phrase1)+'","'+escape(c.phrase2)+'"\n');
+        DECKMGR.active().next();
+    }
+    d.document.write('</textarea></html>');
+    d.document.close();
+    return true;
+}
+
 //show conf screen for deleting a deck
 function deckDelete() {
     hide('deck-choices');
@@ -163,6 +177,19 @@ function edit() {
   document.getElementById('key').value = card.key;
   show('phrase-form');
   document.getElementById('phrase-1').focus();
+}
+
+//display the Import / Export container, hiding other option windows
+function exim() {
+  hide('option-container');
+  document.getElementById('modal-container-close').onclick = eximClose;
+  show('exim-container');
+}
+
+function eximClose() {
+  hide('exim-container');
+  show('option-container');
+  document.getElementById('modal-container-close').onclick = optionsClose;
 }
 
 //display alternate phrase
@@ -556,8 +583,8 @@ function updateDisplay(opts) {
         //navShow();
         hide('msg-container');
         optionShow();
-        document.getElementById('main').innerHTML = card.phrase1;
-        document.getElementById('main-alt').innerHTML = card.phrase2;
+        document.getElementById('main').innerHTML = escape(card.phrase1);
+        document.getElementById('main-alt').innerHTML = escape(card.phrase2);
         //document.getElementById('meter').innerHTML = card.points;
         document.getElementById('key').value = card.key;
         
